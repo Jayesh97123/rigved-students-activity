@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Largest and Smallest</title>
+</head>
+<body>
+    <script type="text/javascript">
+        var a=[10, -3, 50, -2, 70, 40, 60];
+        document.write('a=['+a+']<br>');
+        document.write('<h4>Largest Number is </h4>'+Math.max(...a)+'<br>');//Using the three dots (…) makes it easy to call any function expecting arguments.
+        document.write('<h4>Smallest Number is </h4>'+Math.min.apply(Math,a));// apply() method to find the maximum element in a numeric array
+    </script>
+</body>
+</html>
