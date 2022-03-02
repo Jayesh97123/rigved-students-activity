@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form</title>
+</head>
+<body>
+    <form action="sample.html" method="post" onsubmit="return validateform();" name="testform">
+        <table style="text-align: left;">
+            <tr>
+                <th>First Name</th>
+                <td><input name="first" type="text" autocomplete="off"></td>
+            </tr>
+            <tr>
+                <th>Last Name</th>
+                <td><input name="last" type="text" autocomplete="off"></td>
+            </tr>
+            <tr>
+                <th>Password</th>
+                <td><input name="pass" type="password" autocomplete="off"></td>
+            </tr>
+            <tr>
+                <th>Confirm Password</th>
+                <td><input name="conf_pass" type="password" autocomplete="off"></td>
+            </tr>
+            <tr>
+                <th>Gender</th>
+                <td>
+                    <input name="gender" type="radio" value="M">Male
+                    <input name="gender" type="radio" value="F">Female
+                </td>
+            </tr>
+            <tr>
+                <th>Skills</th>
+                <td>
+                    <input type="checkbox" name="skills" value="javascript" class="skill1">JavaScript
+                    <input type="checkbox" name="skills" value="python" class="skill1">Python
+                    <input type="checkbox" name="skills" value="c++" class="skill1">C++
+                </td>
+            </tr>
+            <tr>
+                <td><input type="submit" value="Submit"></td>
+                <td><input type="reset" value="Reset"></td>
+            </tr>
+        </table>
+    </form>
+    <script type="text/javascript">
+        function validateform(){
+            var firstname=document.testform.first.value;
+            var lastname=document.testform.last.value;
+            var password=document.testform.pass.value;
+            var conf_password=document.testform.conf_pass.value;
+            var gender=document.testform.gender.value;
+            var skill=document.getElementsByClassName('skill1');
+            if(firstname.length>3 ){
+                return validatelast();
+            }else{
+                alert('First Name must be more than 3 characters')
+                return false
+            }
+            function validatelast(){
+                if(lastname.length>3){
+                    return validatepass();
+                }
+                else{
+                    alert('Last Name must be more than 3 characters')
+                    return false
+                }
+            } 
+            function validatepass(){
+                if(password.length>3){
+                    return validateConfPass();
+                }else{
+                    alert('Password must be more than 3 characters')
+                    return false
+                }
+            }
+            function validateConfPass(){
+                if(conf_password===password){
+                    return validateGender();
+                }else{
+                    alert('Confirm password is not match')
+                    return false
+                }
+            }
+            function validateGender(){
+                if(gender=='M' || gender=='F'){
+                    return validateSkills();
+                    
+                }else{
+                    alert('Please select gender.')
+                    return false
+                }
+            }
+            function validateSkills(){
+                if(skill[0].checked==false && skill[1].checked==false && skill[2].checked==false){
+                    alert('Please select atleast one skill.')
+                    return false 
+                }else{
+                    return true
+                }
+            }
+        }
+        
+    </script>
+</body>
+</html>

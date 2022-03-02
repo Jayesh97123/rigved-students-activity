@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>While and Do While loop</title>
+</head>
+<body>
+    <h1>While and Do While loop</h1>
+    <script type="text/javascript">
+        var n=parseInt(prompt('Enter Number of Counter to Stop'));
+        var counter=0;
+        while(counter!=n){
+            document.write('Counter is '+counter+'<br>');
+            counter++;
+        }
+        document.write('Outside while loop<br>');
+        do{
+            document.write('Counter is '+counter+'<br>');
+            counter++;
+        }while(counter!=n+5);
+        document.write('Outside of Do While loop');
+        
+    </script>
+</body>
+</html>
