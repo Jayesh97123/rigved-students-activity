@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arithmetic Operation</title>
+</head>
+<body>
+    <form action="#" method="post">
+        <table style="text-align: left;">
+            <tr>
+                <th>Number 1</th>
+                <td><input type="number" name="n1" id="n1"></td>
+            </tr>
+            <tr>
+                <th>Number 2</th>
+                <td><input type="number" name="n2" id="n2"></td>
+            </tr>
+            <tr>
+                <th>Result</th>
+                <td><span id="output"></span></td>
+            </tr>
+            <tr>
+                <td> 
+                    <input type="button" value="Add" onclick="addition();">  
+                    <input type="button" value="Subtract" onclick="subtraction();"> 
+                </td>
+                <td> 
+                    <input type="button" value="Multiply" onclick="Multiply();">  
+                    <input type="button" value="Division" onclick="Division();"> 
+                </td>
+            </tr>
+        </table>
+    </form>
+    <script type="text/javascript">
+        function addition(){
+            var num1=document.getElementById('n1').value
+            var num2=document.getElementById('n2').value
+            add=parseInt(num1)+parseInt(num2);
+            document.getElementById('output').innerHTML=add
+        }
+        function subtraction(){
+            var num1=document.getElementById('n1').value
+            var num2=document.getElementById('n2').value
+            sub=parseInt(num1)-parseInt(num2);
+            document.getElementById('output').innerHTML=sub
+        }
+        function Multiply(){
+            var num1=document.getElementById('n1').value
+            var num2=document.getElementById('n2').value
+            mult=parseInt(num1)*parseInt(num2);
+            document.getElementById('output').innerHTML=mult
+        }
+        function Division(){
+            var num1=document.getElementById('n1').value
+            var num2=document.getElementById('n2').value
+            Div=parseInt(num1)/parseInt(num2);
+            document.getElementById('output').innerHTML=Div
+        }
+    </script>
+
+</body>
+</html>
