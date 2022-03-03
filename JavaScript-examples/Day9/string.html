@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>String</title>
+</head>
+<body>
+    <script type="text/javascript">
+        var str='Jayesh'
+        var str2=str.concat(' is here')
+        document.write('str: '+str+' str2: '+str2+'<br>');
+        var str3=str.toUpperCase()
+        document.write('str: '+str+' str3: '+str3+'<br>');
+        var str4=str.toLowerCase()
+        document.write('str: '+str+' str4: '+str4+'<br>');
+        var str5=str2.split('e')
+        for(var i=0;i<str5.length;i++){
+            document.write('Items in str5 = '+str5[i]+'<br>')
+        }
+        document.write('str: '+str+' str5: '+str5+'<br>');
+        document.write('Character at particular position 3 = '+str.charAt(3))
+    </script>
+</body>
+</html>
