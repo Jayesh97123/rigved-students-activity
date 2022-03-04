@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inheritance</title>
+</head>
+<body>
+    <h2>Inheritance</h2>
+    <script type="text/javascript">
+        function Person(name, age){
+            this.name=name;
+            this.age=age;
+        }
+        Person.prototype.getName=function(){
+            return this.name;
+        }
+        Person.prototype.getAge=function(){
+            return this.age;
+        }
+        function Emplyoee(id, name, age, salary){
+            Person.call(this, name, age);
+            this.id=id;
+            this.salary=salary;
+        }
+        //inheritting person prototype
+        Emplyoee.prototype=Object.create(Person.prototype);
+        Emplyoee.prototype.getId=function(){
+            return this.id;
+        }
+        Emplyoee.prototype.getSalary=function(){
+            return this.salary;
+        }
+        Emplyoee.prototype.SetName=function(name){
+            return this.name=name;
+        }
+        Emplyoee.prototype.setAge=function(age){
+            return this.age=age;
+        }
+        Emplyoee.prototype.setSalary=function(salary){
+            return this.salary=salary;
+        }
+        var e=new Emplyoee(150, 'Alex', 35, 4800);
+        document.write('<p>Name: '+e.getName()+', Age: '+e.getAge()+'ID: '+e.getId()+', Salary: '+e.getSalary()+'</p>');
+        e.SetName('Jayesh');
+        document.write('<p>Name: '+e.getName()+', Age: '+e.getAge()+'ID: '+e.getId()+', Salary: '+e.getSalary()+'</p>');
+        e.setAge(25);
+        document.write('<p>Name: '+e.getName()+', Age: '+e.getAge()+'ID: '+e.getId()+', Salary: '+e.getSalary()+'</p>');
+        e.setSalary(200000);
+        document.write('<p>Name: '+e.getName()+', Age: '+e.getAge()+'ID: '+e.getId()+', Salary: '+e.getSalary()+'</p>');
+    </script>
+</body>
+</html>

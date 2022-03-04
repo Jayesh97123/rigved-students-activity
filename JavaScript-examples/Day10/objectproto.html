@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Object Prototype</title>
+</head>
+<body>
+    <h2>Object Prototype</h2>
+    <script type="text/javascript">
+        function User(name, age, phone){
+            this.name = name;
+            this.age = age;
+            this.phone = phone;
+        }
+        User.prototype.getName=function(){
+            return this.name;
+        }
+        User.prototype.setName=function(name){
+            return this.name=name;
+        }
+        User.prototype.getAge=function(){
+            return this.age;
+        }
+        User.prototype.getPhone=function(){
+            return this.phone;
+        }
+        User.prototype.setAge=function(age){
+            return this.age=age;
+        }
+        User.prototype.setPhone=function(phone){
+            return this.phone=phone;
+        }
+        var user1=new User('Alex',35,92447711);
+        document.write('<p> Name: '+user1.getName()+', Age: '+user1.getAge()+', Phone No: '+user1.getPhone()+'</p>');
+        user1.setName('Jayesh');
+        document.write('<p> Name: '+user1.getName()+', Age: '+user1.getAge()+', Phone No: '+user1.getPhone()+'</p>');
+        user1.setAge(22);
+        document.write('<p> Name: '+user1.getName()+', Age: '+user1.getAge()+', Phone No: '+user1.getPhone()+'</p>');
+        user1.setPhone(9833669988);
+        document.write('<p> Name: '+user1.getName()+', Age: '+user1.getAge()+', Phone No: '+user1.getPhone()+'</p>');
+    </script>
+</body>
+</html>

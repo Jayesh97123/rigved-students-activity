@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Table</title>
+    <style>
+        *{
+            text-align: center;
+        }
+        table{
+            display: inline-block;
+        }
+    </style>
+
+</head>
+<body>
+    <h2>Customer Table</h2> 
+    <table border="2" cellpadding="10">
+        <thead>
+            <tr>
+                <th>Customer ID</th>
+                <th>Full Name</th>
+                <th>State</th>
+                <th>City</th>
+            </tr>
+        </thead>
+        <tbody id="tb"></tbody>
+    </table>
+    <script type="text/javascript">
+        var list=[
+            {id:1234, firstname:'Sachin',lastname:'Tendulkar',address:{state:'Maharshtra',city:'Mumbai'}},
+            {id:1258, firstname:'Rahul',lastname:'Dravid',address:{state:'Karnataka',city:'Bangalore'}},
+            {id:1280, firstname:'Rohit',lastname:'Sharma',address:{state:'Maharshtra',city:'Pune'}}
+        ]
+        var tb=document.getElementById('tb');
+        for(var i=0;i<list.length;i++){
+            let tr=document.createElement('tr')
+            tb.appendChild(tr);
+            a1=document.createTextNode(list[i].id);
+            a2=document.createTextNode(list[i].firstname+' '+list[i].lastname);
+            a3=document.createTextNode(list[i].address.state);
+            a4=document.createTextNode(list[i].address.city);
+            var td1=document.createElement('td');
+            tr.appendChild(td1);  
+            td1.appendChild(a1);    
+            var td2=document.createElement('td')
+            td2.appendChild(a2);
+            tr.appendChild(td2);  
+            var td3=document.createElement('td')
+            td3.appendChild(a3);
+            tr.appendChild(td3); 
+            var td4=document.createElement('td')
+            td4.appendChild(a4);
+            tr.appendChild(td4);          
+        }
+    </script>
+</body>
+</html>
