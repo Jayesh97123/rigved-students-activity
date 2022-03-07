@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h3 id="i1">Jayesh is Here</h3>
+    <button onclick="ChangeColor()">Change Color</button>
+    <script type="text/javascript">
+        var counter=0;
+        function ChangeColor(){
+            var ele=document.getElementById('i1');
+            var colors=['red','green','blue','gray','violet'];
+            ele.style.color=colors[counter++];
+            if(counter==colors.length){
+                counter=0;
+            }
+        }   
+    </script>
+</body>
+</html>

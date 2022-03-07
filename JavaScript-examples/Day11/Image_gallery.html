@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GAllery</title>
+    <style>
+        div > img{
+            width: 100px;
+            height: 100px;
+        }
+        div{
+            border: 3px solid black;
+        }
+    </style>
+</head>
+<body>
+    <h1>GAllery Pics</h1>
+    <img src="../Pics/sunflower.jpg" alt="Not found" width="500" height="500" id="BigPic">
+    <hr>
+    <div onclick="changePic(event);">
+        <img src="../Pics/DSC_0379.JPG" alt="">
+        <img src="../Pics/DSC_0381.JPG" alt="">
+        <img src="../Pics/DSC_0383.JPG" alt="">
+    </div>
+    <script type="text/javascript">
+        function changePic(e){
+            var ele=e.target;
+            var ele2=document.getElementById('BigPic');
+            if(ele.tagName=='IMG'){
+                ele2.src=ele.src;
+            }
+        }
+    </script>
+</body>
+</html>
