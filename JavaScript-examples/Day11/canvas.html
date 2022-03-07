@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canvas</title>
+    <style>
+        *{
+            text-align: center;
+            background-color: azure;
+        }
+        button{
+            margin: 15px;
+            background-color: rgb(100, 114, 160);
+            color: white;
+        }
+        canvas{
+            background-color: white;
+            box-shadow: 5px 5px 5px gray;
+        }
+    </style>
+</head>
+<body>
+    <h1>Canvas Drawing</h1>
+    <canvas id="c1" width="400" height="400" style="border: solid 2px black;"></canvas>
+    <div>
+        <button onclick="chess();">Chess Board</button>
+        <button onclick="rainbow();">Rain Bow</button>
+    </div>
+    <script type="text/javascript">
+        var ele=document.getElementById('c1');
+        var context=ele.getContext('2d');
+        function chess(){
+            context.clearRect(0,0,ele.width,ele.height);
+            for(var i=0;i<4;i++){
+                for(var j=0;j<4;j++){
+                    var x=j*100
+                    var y=i*100
+                    context.fillStyle='black';
+                    context.fillRect(x,y,50,50);
+                    var x=j*100+50;
+                    var y=i*100+50;
+                    context.fillStyle='black';
+                    context.fillRect(x,y,50,50);
+                }
+            }
+        }
+        function rainbow(){
+            context.clearRect(0,0,ele.width,ele.height);
+            var a=['violet','indigo','blue','green','yellow','orange','red','white']
+            for (var i=0;i<a.length;i++){
+                context.fillStyle=a[i];
+                context.beginPath();
+                context.arc(200,800,700-20*i,0,Math.PI,true);
+                context.fill();
+            }
+        }
+    </script>
+</body>
+</html>
