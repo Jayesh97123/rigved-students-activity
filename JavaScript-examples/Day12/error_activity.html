@@ -6,17 +6,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Error Handling</title>
     <style>
+        h3{
+            text-align: center;
+        }
         p{
             display: inline;
         }
         table{
             text-align: left;
+            margin-left:42% ;
         }
+        
     </style>
 </head>
 <body>
     <h3>Employment From</h3>
-    <table>
+    <table cellspacing="5">
         <tr>
             <th>Name:</th>
             <td><input type="text" id="n1"></td>
@@ -26,7 +31,7 @@
             <td><input type="number" id="a1">&nbsp;<p id="err"></p></td>
         </tr>
         <tr>
-            <td><input type="submit" onclick="errorCheck();" ></td>
+            <td colspan="2"><input type="submit" onclick="errorCheck();" ></td>
         </tr>
     </table>
     <script type="text/javascript" >

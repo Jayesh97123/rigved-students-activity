@@ -5,6 +5,18 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Page 3</title>
+    <style>
+        a{
+            text-decoration: none;
+        }
+        table{
+            margin-left: 42%;
+        }
+        button{
+            margin-left: 47%;
+            margin-top: 5px;
+        }
+    </style>
 </head>
 <body>
     <table>
@@ -13,7 +25,9 @@
             <td><input type="number" id="change"></td>
         </tr>
     </table>
-    <a href="Page2_session_activity.html" onclick="saveChange();">Save</a>
+    <button>
+        <a href="Page2_session_activity.html" onclick="saveChange();">Save</a>
+    </button>
     <script type="text/javascript">
         var a=sessionStorage.getItem('Age');
         document.getElementById('change').value=a;

@@ -5,12 +5,23 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Page 2</title>
+    <style>
+        *{
+            text-align: center;
+            margin: 5px;
+        }
+        a{
+            text-decoration: none;
+        }
+    </style>
 </head>
 <body>
     <h3>Save User</h3>
     <div id="i1"></div>
     <div id="i2"></div>
-    <a href="Page3_session_activity.html">Edit Age</a>
+    <button>
+        <a href="Page3_session_activity.html">Edit Age</a>
+    </button>
     <script type="text/javascript">
         var name=sessionStorage.getItem('Name');
         var age=sessionStorage.getItem('Age');

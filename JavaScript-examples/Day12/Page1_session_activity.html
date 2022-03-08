@@ -5,6 +5,23 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Page 1</title>
+    <style>
+        h3{
+            text-align: center;
+        }
+        table{
+            text-align: center;
+            margin-left: 42%;
+        }
+        a{
+            text-decoration: none;
+        }
+        button{
+            display: block;
+            text-align: center;
+            margin-left: 47%;
+        }
+    </style>
 </head>
 <body>
     <h3>User Form</h3>
@@ -21,7 +38,9 @@
             <th><input type="button" value="Save" onclick="storeUser();"></th>
         </tr>
     </table>
-    <a href="Page2_session_activity.html">Show Save Info</a>
+    <button>
+        <a href="Page2_session_activity.html">Show Save Info</a>
+    </button>
     <script type="text/javascript">
         function storeUser(){
           var n1=document.getElementById('f1').value;
