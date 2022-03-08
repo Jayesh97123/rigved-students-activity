@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Regex</title>
+</head>
+<body>
+    <!-- <input type="text" autocomplete="off" onkeydown="return allowInput(event);"> -->
+    <input type="text" autocomplete="off" onkeyup="allowInput();" id="i1">
+    <script type="text/javascript">
+        // function allowInput(e){
+        //     var exp=/[a-zA-Z]/;
+        //     var value=e.key;
+        //     console.log('Value: '+value+', Matches expression: '+exp.test(value));
+        //     return exp.test(value)
+        // }
+        function allowInput(){
+            var exp=/[a-zA-Z]/
+            var a=document.getElementById('i1').value;
+            console.log(a)
+            console.log(exp.test(a))
+        }
+    </script>
+</body>
+</html>

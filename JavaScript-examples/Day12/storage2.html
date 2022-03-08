@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Storage2</title>
+</head>
+<body>
+    <h1>Store Data</h1>
+    <div id="i1"></div>
+    <div id="i2"></div>
+    <button onclick="removeUser();">Remove</button>
+    <script type="text/javascript">
+        var s1=sessionStorage.getItem('Name');
+        var l1=localStorage.getItem('Name');
+        document.getElementById('i1').innerHTML='Hello Session '+s1;
+        document.getElementById('i2').innerHTML='Hello Local '+l1;
+        function removeUser(){
+            sessionStorage.removeItem('Name');
+            localStorage.removeItem('Name');
+        }
+    </script>
+</body>
+</html>
