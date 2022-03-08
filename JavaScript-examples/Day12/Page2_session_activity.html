@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page 2</title>
+</head>
+<body>
+    <h3>Save User</h3>
+    <div id="i1"></div>
+    <div id="i2"></div>
+    <a href="Page3_session_activity.html">Edit Age</a>
+    <script type="text/javascript">
+        var name=sessionStorage.getItem('Name');
+        var age=sessionStorage.getItem('Age');
+        document.getElementById('i1').innerHTML='Hello '+name;
+        document.getElementById('i2').innerHTML='Age is '+age;
+    </script>
+</body>
+</html>
