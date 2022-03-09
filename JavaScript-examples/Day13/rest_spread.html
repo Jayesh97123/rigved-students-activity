@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rest and Spread operator</title>
+</head>
+<body>
+    <script type="text/javascript">
+        function test(a, b, c){
+            document.write('a = '+a+'<br>');
+            document.write('b = '+b+'<br>');
+            document.write('c = '+c+'<br>');
+        }
+        test(20,30);
+        test(20,30,50,80);
+        function test2(a, b, ...c){//...c is rest
+            document.write('a = '+a+'<br>');
+            document.write('b = '+b+'<br>');
+            document.write('c = '+c+'<br>');
+        }
+        test2(20,30);
+        test2(20,30,50,80);
+        x = [80,20,30,60,90];
+        test2(...x);//x values are spread to a, b and ...c
+    </script>
+</body>
+</html>
