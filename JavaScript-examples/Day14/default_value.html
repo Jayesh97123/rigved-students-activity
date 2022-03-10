@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Default Value</title>
+</head>
+<body>
+    <script type="text/javascript">
+        function multiple(c,a=1,b=1){
+            return a*b*c;
+        }
+        var r=multiple(2,3,6);
+        document.write(`<p>Result: ${r}</p>`);
+        var r=multiple();
+        document.write(`<p>Result: ${r}</p>`);
+        var r=multiple(5);
+        document.write(`<p>Result: ${r}</p>`);
+        var r=multiple(5,7);
+        document.write(`<p>Result: ${r}</p>`);
+    </script>
+</body>
+</html>

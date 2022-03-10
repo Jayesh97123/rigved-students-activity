@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Template String literals</title>
+</head>
+<body>
+    <script type="text/javascript">
+        let name = 'Jay';
+        let age = 25;
+        //old way of accessing the data in a string
+        document.write('<p>Hello '+name+', your age: '+age+'</p>');
+        //New way of accessing the data in a string
+        document.write(`<p>Hello ${name}, your age: ${age}</p>`);
+        let items = ['apple','orange', 'grapes'];
+        document.write(`Unordered list<ul>`);
+            items.forEach(function(item,i){
+                document.write(`<li>${item}</li>`);
+            });
+        document.write(`</ul>`)
+        document.write("Ordered list with type i<ol type='i'>");
+            items.forEach(function(item,i){
+                document.write(`<li>${item}</li>`);
+            });
+        document.write("</ol>");
+    </script>
+</body>
+</html>

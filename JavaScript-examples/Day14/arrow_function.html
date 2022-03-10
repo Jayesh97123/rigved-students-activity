@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arrow function</title>
+</head>
+<body>
+    <h2>Arrow function is known as Anonymous function</h2>
+    <script type="text/javascript">
+        var items=[8,6,4,7];
+        items.forEach(function(item,i){
+            document.write(`<p>${item} at position ${i}</p>`);
+        })
+        document.write('<hr>');
+        // arrow function in forEach for single line statment
+        items.forEach((item,i)=>document.write(`<p>${item} at position ${i}</p>`));
+        //arrow function in map for single line statment
+        var items2=items.map((item,i)=> item*10);
+        document.write('<hr>');
+        items2.forEach((item,i)=>document.write(`<p>${item} at position ${i}</p>`));
+        document.write('<hr>')
+        //arrow function in foreach for multiple line statment
+        items2.forEach((item, i)=>{
+            document.write(`<p>${item} at position ${i}</p>`)
+            console.log(`${item} at position ${i}`)
+        })
+        document.write('<hr>');
+        //create arrow function
+        add = (a,b) =>document.write(`Addition is ${a+b}`);
+        //call arrow function
+        add(5,2);
+    </script>
+</body>
+</html>

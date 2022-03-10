@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pad Start and End</title>
+</head>
+<body>
+    <h2>String padStart and padEnd</h2>
+    <script type="text/javascript">
+        let str1='84757'
+        let str2='31664846444'
+        let r1=str1.padStart(10,'*');
+        let r2=str2.padStart(10,'*');
+        document.write(`<p>Pad Start: ${r1}</p>`);
+        document.write(`<p>Pad Start: ${r2}</p>`);
+        let r3=str1.padEnd(10,'*');
+        let r4=str2.padEnd(10,'*');
+        document.write(`<p>Pad Start: ${r3}</p>`);
+        document.write(`<p>Pad Start: ${r4}</p>`);
+        document.write(`${r3}${r1}`);
+    </script>
+</body>
+</html>

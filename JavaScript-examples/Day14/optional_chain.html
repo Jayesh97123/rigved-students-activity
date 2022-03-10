@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Optional Chain Demo!</title>
+</head>
+<body>
+    <h3>Optional Chain Demo!</h3>
+    <script type="text/javascript">
+        var users=[
+            {name:'Alex', age:35, address:{state:'KA', city:'BLR'}},
+            {name:'Bruce', age:45},
+            {name:'Charles', age:25, address:{state:'MH', city:'MBI'}},
+            {name:'David', age:49},
+            {name:'Edward', age:33, address:{state:'TN', city:'CHN'}}
+        ]
+        for(let i=0;i<users.length;i++){
+            document.write(`<p>Name: ${users[i].name}, Age: ${users[i].age},
+                 State: ${users[i]?.address?.state}, City: ${users[i]?.address?.city}</p>`);
+        }
+    </script>
+</body>
+</html>

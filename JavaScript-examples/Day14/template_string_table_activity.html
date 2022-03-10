@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Template table</title>
+    <style>
+        h2{
+            text-align: center;
+        }
+        table{
+            margin-left: 41%;
+            text-align: center;
+            background-color: aqua;
+            border-color: blue;
+        }
+    </style>
+</head>
+<body>
+    <h2>List of users</h2>
+    <script type="text/javascript">
+        var users=[
+            {name:'Alex', age:35, address:{state:'KA', city:'BLR'}},
+            {name:'Bruce', age:45},
+            {name:'Charles', age:25, address:{state:'MH', city:'MBI'}},
+            {name:'David', age:49},
+            {name:'Edward', age:33, address:{state:'TN', city:'CHN'}}
+        ]
+        document.write(`
+        <table border="2" cellPadding='5'>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Age</th>
+                <th>State</th>
+                <th>City</th>
+            </tr>
+        </thead>
+        <tbody>
+        `)
+        for(var i=0;i<users.length;i++){
+            document.write(`<tr>`)
+            document.write(`
+                <td>${users[i].name}</td>
+                <td>${users[i].age}</td>
+                <td>${users[i]?.address?.state}</td>
+                <td>${users[i]?.address?.city}</td>
+            `)
+            document.write(`</tr>`)
+        }
+        document.write(`
+        </tbody>
+        </table>
+        `)
+    </script>
+</body>
+</html>
