@@ -1,0 +1,199 @@
+mysql> show databases;
++-----------------------+
+| Database              |
++-----------------------+
+| djangoabstractproject |
+| djangoproject         |
+| information_schema    |
+| mysql                 |
+| performance_schema    |
+| sys                   |
++-----------------------+
+6 rows in set (0.01 sec)
+
+mysql> create database Rigved_Technology;
+Query OK, 1 row affected (0.04 sec)
+
+mysql> show databases;
++-----------------------+
+| Database              |
++-----------------------+
+| djangoabstractproject |
+| djangoproject         |
+| information_schema    |
+| mysql                 |
+| performance_schema    |
+| rigved_technology     |
+| sys                   |
++-----------------------+
+7 rows in set (0.00 sec)
+
+mysql> use rigved_technology;
+Database changed
+
+mysql> show tables;
+Empty set (0.03 sec)
+
+1.Create a table employee which will have following column names and the constraint
+employee_id - primary key
+employee_name - not null
+age - check constraint which must accept value between 18 and 60
+email - unique constraint
+
+mysql> create table employee(id int primary key, name varchar(25) not null, age int, check (age<60 and age>18),email varchar(25) unique );
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> show tables;
++-----------------------------+
+| Tables_in_rigved_technology |
++-----------------------------+
+| employee                    |
++-----------------------------+
+1 row in set (0.03 sec)
+
+mysql> desc employee;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| id    | int         | NO   | PRI | NULL    |       |
+| name  | varchar(25) | NO   |     | NULL    |       |
+| age   | int         | YES  |     | NULL    |       |
+| email | varchar(25) | YES  | UNI | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+4 rows in set (0.03 sec)
+
+2.Store the records in the above employee table & try to store age 70 and age 17 and see what happens
+
+mysql> insert into employee values(10,'Jayesh',15,'sffsd@gmail.com');
+ERROR 3819 (HY000): Check constraint 'employee_chk_1' is violated.
+
+mysql> insert into employee values(20,'Jay',70,'gsefef@gmail.com');
+ERROR 3819 (HY000): Check constraint 'employee_chk_1' is violated.
+
+3.Store the few more records in the above employee table & try to store same email to multiple records and observe what happens
+
+mysql> insert into employee values(10,'Jayesh',25,'sffsd@gmail.com');
+Query OK, 1 row affected (0.03 sec)
+
+mysql> insert into employee values(20,'Jay',70,'gsefef@gmail.com');
+ERROR 3819 (HY000): Check constraint 'employee_chk_1' is violated.
+
+mysql> insert into employee values(20,'Jay',29,'rdrgesg@gmail.com'),(25,'Nik',26,'afsefsaef@gmail.com');
+Query OK, 2 rows affected (0.03 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> select * from employee;
++----+--------+------+---------------------+
+| id | name   | age  | email               |
++----+--------+------+---------------------+
+| 10 | Jayesh |   25 | sffsd@gmail.com     |
+| 20 | Jay    |   29 | rdrgesg@gmail.com   |
+| 25 | Nik    |   26 | afsefsaef@gmail.com |
++----+--------+------+---------------------+
+3 rows in set (0.00 sec)
+
+mysql> insert into employee values(10,'Jayesh',25,'sffsd@gmail.com');
+ERROR 1062 (23000): Duplicate entry '10' for key 'employee.PRIMARY'
+
+4.Alter the above employee table add two new columns pan and aadhar
+
+mysql> alter table employee add column pan varchar(10), add column aadhar bigint;
+Query OK, 0 rows affected (0.06 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc employee;
++--------+-------------+------+-----+---------+-------+
+| Field  | Type        | Null | Key | Default | Extra |
++--------+-------------+------+-----+---------+-------+
+| id     | int         | NO   | PRI | NULL    |       |
+| name   | varchar(25) | NO   |     | NULL    |       |
+| age    | int         | YES  |     | NULL    |       |
+| email  | varchar(25) | YES  | UNI | NULL    |       |
+| pan    | varchar(10) | YES  |     | NULL    |       |
+| aadhar | bigint      | YES  |     | NULL    |       |
++--------+-------------+------+-----+---------+-------+
+6 rows in set (0.00 sec)
+
+5.Alter the above employee table and add unique constraints to pan and aadhar
+
+mysql> alter table employee add constraint uq_pan unique key (pan),add constraint uq_aadhar unique key (aadhar);
+Query OK, 0 rows affected (0.07 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc employee;
++--------+-------------+------+-----+---------+-------+
+| Field  | Type        | Null | Key | Default | Extra |
++--------+-------------+------+-----+---------+-------+
+| id     | int         | NO   | PRI | NULL    |       |
+| name   | varchar(25) | NO   |     | NULL    |       |
+| age    | int         | YES  |     | NULL    |       |
+| email  | varchar(25) | YES  | UNI | NULL    |       |
+| pan    | varchar(10) | YES  | UNI | NULL    |       |
+| aadhar | bigint      | YES  | UNI | NULL    |       |
++--------+-------------+------+-----+---------+-------+
+6 rows in set (0.04 sec)
+
+mysql> select * from employee;
++----+--------+------+---------------------+------+--------+
+| id | name   | age  | email               | pan  | aadhar |
++----+--------+------+---------------------+------+--------+
+| 10 | Jayesh |   25 | sffsd@gmail.com     | NULL |   NULL |
+| 20 | Jay    |   29 | rdrgesg@gmail.com   | NULL |   NULL |
+| 25 | Nik    |   26 | afsefsaef@gmail.com | NULL |   NULL |
++----+--------+------+---------------------+------+--------+
+3 rows in set (0.00 sec)
+
+6.Insert few records in employee table and observe the result, try to pass duplicate aadhar or pan and observe the result.
+
+mysql> insert into employee values(30,'Bhau',25,'dhsdrh@gmail.com','dzjch56348',4365464656);
+Query OK, 1 row affected (0.03 sec)
+
+mysql> insert into employee values(35,'Bhavesh',25,'dhchfjg@gmail.com','dzjcf56348',4312444656);
+Query OK, 1 row affected (0.03 sec)
+
+mysql> select * from employee;
++----+---------+------+---------------------+------------+------------+
+| id | name    | age  | email               | pan        | aadhar     |
++----+---------+------+---------------------+------------+------------+
+| 10 | Jayesh  |   25 | sffsd@gmail.com     | NULL       |       NULL |
+| 20 | Jay     |   29 | rdrgesg@gmail.com   | NULL       |       NULL |
+| 25 | Nik     |   26 | afsefsaef@gmail.com | NULL       |       NULL |
+| 30 | Bhau    |   25 | dhsdrh@gmail.com    | dzjch56348 | 4365464656 |
+| 35 | Bhavesh |   25 | dhchfjg@gmail.com   | dzjcf56348 | 4312444656 |
++----+---------+------+---------------------+------------+------------+
+5 rows in set (0.00 sec)
+
+mysql> insert into employee values(40,'Jayu',25,'jgvg@gmail.com','dzjch56348',4365464656);
+ERROR 1062 (23000): Duplicate entry 'dzjch56348' for key 'employee.uq_pan'
+
+mysql> insert into employee values(40,'Jayu',25,'jgvg@gmail.com','dzkbhh5634',4365464656);
+ERROR 1062 (23000): Duplicate entry '4365464656' for key 'employee.uq_aadhar'
+
+7.Alter the above employee table and remove the pan and aadhar columns
+
+mysql> alter table employee drop column pan, drop column aadhar;
+Query OK, 0 rows affected (0.12 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+8.Observe the result after removing the columns
+
+mysql> select * from employee;
++----+---------+------+---------------------+
+| id | name    | age  | email               |
++----+---------+------+---------------------+
+| 10 | Jayesh  |   25 | sffsd@gmail.com     |
+| 20 | Jay     |   29 | rdrgesg@gmail.com   |
+| 25 | Nik     |   26 | afsefsaef@gmail.com |
+| 30 | Bhau    |   25 | dhsdrh@gmail.com    |
+| 35 | Bhavesh |   25 | dhchfjg@gmail.com   |
++----+---------+------+---------------------+
+5 rows in set (0.00 sec)
+
+9.Using the DROP delete the employee table.
+
+mysql> drop table employee;
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> show tables;
+Empty set (0.00 sec)
+
