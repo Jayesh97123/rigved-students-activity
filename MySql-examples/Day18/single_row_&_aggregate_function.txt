@@ -1,0 +1,332 @@
+Enter password: ****
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 14
+Server version: 8.0.26 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2021, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show databases;
++-----------------------+
+| Database              |
++-----------------------+
+| djangoabstractproject |
+| djangoproject         |
+| information_schema    |
+| mysql                 |
+| performance_schema    |
+| rigved_technology     |
+| sys                   |
++-----------------------+
+7 rows in set (0.07 sec)
+
+mysql> use rigved_technology;
+Database changed
+mysql> show tables;
+Empty set (0.04 sec)
+
+mysql> create table emp (id int primary key auto_increment,name varchar(25), salary double)auto_increment=10;
+Query OK, 0 rows affected (0.10 sec)
+
+mysql> desc emp;
++--------+-------------+------+-----+---------+----------------+
+| Field  | Type        | Null | Key | Default | Extra          |
++--------+-------------+------+-----+---------+----------------+
+| id     | int         | NO   | PRI | NULL    | auto_increment |
+| name   | varchar(25) | YES  |     | NULL    |                |
+| salary | double      | YES  |     | NULL    |                |
++--------+-------------+------+-----+---------+----------------+
+3 rows in set (0.04 sec)
+
+mysql> truncate table emp;
+Query OK, 0 rows affected (0.07 sec)
+
+mysql> desc emp;
++--------+-------------+------+-----+---------+----------------+
+| Field  | Type        | Null | Key | Default | Extra          |
++--------+-------------+------+-----+---------+----------------+
+| id     | int         | NO   | PRI | NULL    | auto_increment |
+| name   | varchar(25) | YES  |     | NULL    |                |
+| salary | double      | YES  |     | NULL    |                |
++--------+-------------+------+-----+---------+----------------+
+3 rows in set (0.00 sec)
+
+mysql> show tables;
++-----------------------------+
+| Tables_in_rigved_technology |
++-----------------------------+
+| emp                         |
++-----------------------------+
+1 row in set (0.03 sec)
+
+mysql> alter table emp add column edate date after name;
+Query OK, 0 rows affected (0.08 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc emp;
++--------+-------------+------+-----+---------+----------------+
+| Field  | Type        | Null | Key | Default | Extra          |
++--------+-------------+------+-----+---------+----------------+
+| id     | int         | NO   | PRI | NULL    | auto_increment |
+| name   | varchar(25) | YES  |     | NULL    |                |
+| edate  | date        | YES  |     | NULL    |                |
+| salary | double      | YES  |     | NULL    |                |
++--------+-------------+------+-----+---------+----------------+
+4 rows in set (0.03 sec)
+
+mysql> insert into emp (name, edate, salary) values('Jay','1997-02-25',25000.00);
+Query OK, 1 row affected (0.03 sec)
+
+mysql> select * from emp;
++----+------+------------+--------+
+| id | name | edate      | salary |
++----+------+------------+--------+
+|  1 | Jay  | 1997-02-25 |  25000 |
++----+------+------------+--------+
+1 row in set (0.00 sec)
+
+mysql> insert into emp (name, edate, salary) values('Nik','1999-02-25',25000.00),('Vasant','1997-05-12'),('Jayesh','1998-06-24');
+ERROR 1136 (21S01): Column count doesn't match value count at row 2
+mysql> insert into emp (name, edate, salary) values('Nik','1999-02-25',25000.00),('Vasant','1997-05-12'),('Jayesh','1998-06-24',46842);
+ERROR 1136 (21S01): Column count doesn't match value count at row 2
+mysql> insert into emp (name, edate, salary) values('Nik','1999-02-25',25000.00),('Vasant','1997-05-12',45000),('Jayesh','1998-06-24',46842);
+Query OK, 3 rows affected (0.03 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> select * from emp;
++----+--------+------------+--------+
+| id | name   | edate      | salary |
++----+--------+------------+--------+
+|  1 | Jay    | 1997-02-25 |  25000 |
+|  2 | Nik    | 1999-02-25 |  25000 |
+|  3 | Vasant | 1997-05-12 |  45000 |
+|  4 | Jayesh | 1998-06-24 |  46842 |
++----+--------+------------+--------+
+4 rows in set (0.00 sec)
+
+mysql> select edate, date_fromat(edate,'%d-%m-%y') from emp;
+ERROR 1305 (42000): FUNCTION rigved_technology.date_fromat does not exist
+mysql> select edate, date_format(edate,'%d-%m-%y') from emp;
++------------+-------------------------------+
+| edate      | date_format(edate,'%d-%m-%y') |
++------------+-------------------------------+
+| 1997-02-25 | 25-02-97                      |
+| 1999-02-25 | 25-02-99                      |
+| 1997-05-12 | 12-05-97                      |
+| 1998-06-24 | 24-06-98                      |
++------------+-------------------------------+
+4 rows in set (0.00 sec)
+
+mysql> select edate, date_format(edate,'%d-%m-%y') Date-Month-Year from emp;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '-Month-Year from emp' at line 1
+mysql> select edate, date_format(edate,'%d-%m-%y') Date_Month_Year from emp;
++------------+-----------------+
+| edate      | Date_Month_Year |
++------------+-----------------+
+| 1997-02-25 | 25-02-97        |
+| 1999-02-25 | 25-02-99        |
+| 1997-05-12 | 12-05-97        |
+| 1998-06-24 | 24-06-98        |
++------------+-----------------+
+4 rows in set (0.00 sec)
+
+mysql> select edate, date_format(edate,'%d-%m-%Y') Date_Month_Year from emp;
++------------+-----------------+
+| edate      | Date_Month_Year |
++------------+-----------------+
+| 1997-02-25 | 25-02-1997      |
+| 1999-02-25 | 25-02-1999      |
+| 1997-05-12 | 12-05-1997      |
+| 1998-06-24 | 24-06-1998      |
++------------+-----------------+
+4 rows in set (0.00 sec)
+
+mysql> select edate, date_format(edate,'%D-%m-%Y') Date_Month_Year from emp;
++------------+-----------------+
+| edate      | Date_Month_Year |
++------------+-----------------+
+| 1997-02-25 | 25th-02-1997    |
+| 1999-02-25 | 25th-02-1999    |
+| 1997-05-12 | 12th-05-1997    |
+| 1998-06-24 | 24th-06-1998    |
++------------+-----------------+
+4 rows in set (0.00 sec)
+
+mysql> select edate, date_format(edate,'%D-%M-%Y') Date_Month_Year from emp;
++------------+--------------------+
+| edate      | Date_Month_Year    |
++------------+--------------------+
+| 1997-02-25 | 25th-February-1997 |
+| 1999-02-25 | 25th-February-1999 |
+| 1997-05-12 | 12th-May-1997      |
+| 1998-06-24 | 24th-June-1998     |
++------------+--------------------+
+4 rows in set (0.03 sec)
+
+mysql> select * from emp where salary between 45000 and 50000;
++----+--------+------------+--------+
+| id | name   | edate      | salary |
++----+--------+------------+--------+
+|  3 | Vasant | 1997-05-12 |  45000 |
+|  4 | Jayesh | 1998-06-24 |  46842 |
++----+--------+------------+--------+
+2 rows in set (0.03 sec)
+
+mysql> select count(*) from emp;
++----------+
+| count(*) |
++----------+
+|        4 |
++----------+
+1 row in set (0.03 sec)
+
+mysql> select count(name) from emp;
++-------------+
+| count(name) |
++-------------+
+|           4 |
++-------------+
+1 row in set (0.03 sec)
+
+mysql> select min(salary) from emp;
++-------------+
+| min(salary) |
++-------------+
+|       25000 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> select max(salary) from emp;
++-------------+
+| max(salary) |
++-------------+
+|       46842 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> select avg(salary) from emp;
++-------------+
+| avg(salary) |
++-------------+
+|     35460.5 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> select upper(name) from emp;
++-------------+
+| upper(name) |
++-------------+
+| JAY         |
+| NIK         |
+| VASANT      |
+| JAYESH      |
++-------------+
+4 rows in set (0.03 sec)
+
+mysql> select lower(name) from emp;
++-------------+
+| lower(name) |
++-------------+
+| jay         |
+| nik         |
+| vasant      |
+| jayesh      |
++-------------+
+4 rows in set (0.03 sec)
+
+mysql> select name,replace(name,'a','e') from emp;
++--------+-----------------------+
+| name   | replace(name,'a','e') |
++--------+-----------------------+
+| Jay    | Jey                   |
+| Nik    | Nik                   |
+| Vasant | Vesent                |
+| Jayesh | Jeyesh                |
++--------+-----------------------+
+4 rows in set (0.00 sec)
+
+mysql> select concat(name,edate) from emp;
++--------------------+
+| concat(name,edate) |
++--------------------+
+| Jay1997-02-25      |
+| Nik1999-02-25      |
+| Vasant1997-05-12   |
+| Jayesh1998-06-24   |
++--------------------+
+4 rows in set (0.03 sec)
+
+mysql> select concat(name,' ',edate) from emp;
++------------------------+
+| concat(name,' ',edate) |
++------------------------+
+| Jay 1997-02-25         |
+| Nik 1999-02-25         |
+| Vasant 1997-05-12      |
+| Jayesh 1998-06-24      |
++------------------------+
+4 rows in set (0.00 sec)
+
+mysql> select name, substring(name, 'a') from emp;
++--------+----------------------+
+| name   | substring(name, 'a') |
++--------+----------------------+
+| Jay    |                      |
+| Nik    |                      |
+| Vasant |                      |
+| Jayesh |                      |
++--------+----------------------+
+4 rows in set, 5 warnings (0.03 sec)
+
+mysql> select name, reverse(name) from emp;
++--------+---------------+
+| name   | reverse(name) |
++--------+---------------+
+| Jay    | yaJ           |
+| Nik    | kiN           |
+| Vasant | tnasaV        |
+| Jayesh | hseyaJ        |
++--------+---------------+
+4 rows in set (0.00 sec)
+
+mysql> select * from emp where year(edate)>1997;
++----+--------+------------+--------+
+| id | name   | edate      | salary |
++----+--------+------------+--------+
+|  2 | Nik    | 1999-02-25 |  25000 |
+|  4 | Jayesh | 1998-06-24 |  46842 |
++----+--------+------------+--------+
+2 rows in set (0.03 sec)
+
+mysql> select * from emp where date(edate)>24;
++----+--------+------------+--------+
+| id | name   | edate      | salary |
++----+--------+------------+--------+
+|  1 | Jay    | 1997-02-25 |  25000 |
+|  2 | Nik    | 1999-02-25 |  25000 |
+|  3 | Vasant | 1997-05-12 |  45000 |
+|  4 | Jayesh | 1998-06-24 |  46842 |
++----+--------+------------+--------+
+4 rows in set (0.00 sec)
+
+mysql> select salary abs(salary) from emp where date(edate)>24;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '(salary) from emp where date(edate)>24' at line 1
+mysql> select salary abs(salary) from emp;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '(salary) from emp' at line 1
+mysql> select salary,abs(salary) from emp;
++--------+-------------+
+| salary | abs(salary) |
++--------+-------------+
+|  25000 |       25000 |
+|  25000 |       25000 |
+|  45000 |       45000 |
+|  46842 |       46842 |
++--------+-------------+
+4 rows in set (0.03 sec)
+
+mysql>

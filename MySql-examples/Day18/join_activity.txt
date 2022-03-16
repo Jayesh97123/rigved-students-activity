@@ -1,0 +1,89 @@
+Student table:
+RollNo	Name	Age
+1	Raj	20
+2	Ramesh	20
+3	Ravi	21
+4	Suraj	22
+
+mysql> create table student (Roll_No int primary key, Name varchar(25), Age int);
+Query OK, 0 rows affected (0.65 sec)
+
+mysql> desc student;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| Roll_No | int         | NO   | PRI | NULL    |       |
+| Name    | varchar(25) | YES  |     | NULL    |       |
+| Age     | int         | YES  |     | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+3 rows in set (0.67 sec)
+
+mysql> insert into student values(1,'Raj',20),(2,'Ramesh',20),(3,'Ravi',21),(4,'Suraj',22);
+Query OK, 4 rows affected (0.03 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+mysql> select * from student;
++---------+--------+------+
+| Roll_No | Name   | Age  |
++---------+--------+------+
+|       1 | Raj    |   20 |
+|       2 | Ramesh |   20 |
+|       3 | Ravi   |   21 |
+|       4 | Suraj  |   22 |
++---------+--------+------+
+4 rows in set (0.00 sec)
+
+Marks table:
+Mid	Physics	Maths	Chemistry	Student_RollNo
+11	70	80	70		2
+22	80	80	80		1
+33	90	90	70		3
+44	88	88	77		4
+
+mysql> create table marks(Marks_id int primary key, Physics int, Maths int, Chemistry int, student_rollNo int, foreign key(student_rollNo) references student(Roll_No));
+
+mysql> desc marks;
++----------------+------+------+-----+---------+-------+
+| Field          | Type | Null | Key | Default | Extra |
++----------------+------+------+-----+---------+-------+
+| Marks_id       | int  | NO   | PRI | NULL    |       |
+| Physics        | int  | YES  |     | NULL    |       |
+| Maths          | int  | YES  |     | NULL    |       |
+| Chemistry      | int  | YES  |     | NULL    |       |
+| student_rollNo | int  | YES  | MUL | NULL    |       |
++----------------+------+------+-----+---------+-------+
+5 rows in set (0.03 sec)
+
+mysql> insert into marks values(11,70,80,70,2),(22,80,80,80,1),(33,90,90,70,3),(44,88,88,77,4);
+Query OK, 4 rows affected (0.04 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+mysql> select * from marks;
++----------+---------+-------+-----------+----------------+
+| Marks_id | Physics | Maths | Chemistry | student_rollNo |
++----------+---------+-------+-----------+----------------+
+|       11 |      70 |    80 |        70 |              2 |
+|       22 |      80 |    80 |        80 |              1 |
+|       33 |      90 |    90 |        70 |              3 |
+|       44 |      88 |    88 |        77 |              4 |
++----------+---------+-------+-----------+----------------+
+4 rows in set (0.00 sec)
+
+Now when you join student & marks you must get a resultant table as below;
+
+RollNo	Name	Physics	Maths	Chemistry	Total	Average
+1	Raj	80	80	80		240	80
+2	Ramesh	70	80	70		220	73.3
+3	Ravi	90	90	70		250	83.3
+4	Suraj	88	88	77		253	84.3
+
+mysql> select s.roll_no RollNo,s.name Name,m.physics Physics,m.maths Maths,m.chemistry Chemistry, (Physics+Maths+Chemistry) Total, round((Physics+Maths+Chemistry)/3,2) Average from student s inner join marks m on s.roll_no=m.student_rollno;
++--------+--------+---------+-------+-----------+-------+---------+
+| RollNo | Name   | Physics | Maths | Chemistry | Total | Average |
++--------+--------+---------+-------+-----------+-------+---------+
+|      1 | Raj    |      80 |    80 |        80 |   240 |   80.00 |
+|      2 | Ramesh |      70 |    80 |        70 |   220 |   73.33 |
+|      3 | Ravi   |      90 |    90 |        70 |   250 |   83.33 |
+|      4 | Suraj  |      88 |    88 |        77 |   253 |   84.33 |
++--------+--------+---------+-------+-----------+-------+---------+
+4 rows in set (0.03 sec)

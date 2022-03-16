@@ -1,0 +1,178 @@
+Enter password: ****
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 16
+Server version: 8.0.26 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2021, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show databases;
++-----------------------+
+| Database              |
++-----------------------+
+| djangoabstractproject |
+| djangoproject         |
+| information_schema    |
+| mysql                 |
+| performance_schema    |
+| rigved_technology     |
+| sys                   |
++-----------------------+
+7 rows in set (0.03 sec)
+
+mysql> use rigved_technology;
+Database changed
+mysql> show tables;
++-----------------------------+
+| Tables_in_rigved_technology |
++-----------------------------+
+| emp                         |
+| marks                       |
+| student                     |
++-----------------------------+
+3 rows in set (0.02 sec)
+
+mysql> select * from marks where id in (1,2);
+ERROR 1054 (42S22): Unknown column 'id' in 'where clause'
+mysql> select * from marks where student_rollno in (1,2);
++----------+---------+-------+-----------+----------------+
+| Marks_id | Physics | Maths | Chemistry | student_rollNo |
++----------+---------+-------+-----------+----------------+
+|       22 |      80 |    80 |        80 |              1 |
+|       11 |      70 |    80 |        70 |              2 |
++----------+---------+-------+-----------+----------------+
+2 rows in set (0.03 sec)
+
+mysql> select * from marks;
++----------+---------+-------+-----------+----------------+
+| Marks_id | Physics | Maths | Chemistry | student_rollNo |
++----------+---------+-------+-----------+----------------+
+|       11 |      70 |    80 |        70 |              2 |
+|       22 |      80 |    80 |        80 |              1 |
+|       33 |      90 |    90 |        70 |              3 |
+|       44 |      88 |    88 |        77 |              4 |
++----------+---------+-------+-----------+----------------+
+4 rows in set (0.00 sec)
+
+mysql> select * from marks where student_rollno not in (1,2);
++----------+---------+-------+-----------+----------------+
+| Marks_id | Physics | Maths | Chemistry | student_rollNo |
++----------+---------+-------+-----------+----------------+
+|       33 |      90 |    90 |        70 |              3 |
+|       44 |      88 |    88 |        77 |              4 |
++----------+---------+-------+-----------+----------------+
+2 rows in set (0.00 sec)
+
+mysql> update marks set chemistry = 75 where student_rollno=3
+    -> ;
+Query OK, 1 row affected (0.03 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from marks;
++----------+---------+-------+-----------+----------------+
+| Marks_id | Physics | Maths | Chemistry | student_rollNo |
++----------+---------+-------+-----------+----------------+
+|       11 |      70 |    80 |        70 |              2 |
+|       22 |      80 |    80 |        80 |              1 |
+|       33 |      90 |    90 |        75 |              3 |
+|       44 |      88 |    88 |        77 |              4 |
++----------+---------+-------+-----------+----------------+
+4 rows in set (0.03 sec)
+
+mysql> update marks set chemistry = 70 where student_rollno=3
+    -> ;
+Query OK, 1 row affected (0.03 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from marks;
++----------+---------+-------+-----------+----------------+
+| Marks_id | Physics | Maths | Chemistry | student_rollNo |
++----------+---------+-------+-----------+----------------+
+|       11 |      70 |    80 |        70 |              2 |
+|       22 |      80 |    80 |        80 |              1 |
+|       33 |      90 |    90 |        70 |              3 |
+|       44 |      88 |    88 |        77 |              4 |
++----------+---------+-------+-----------+----------------+
+4 rows in set (0.03 sec)
+
+mysql> select * from students;
+ERROR 1146 (42S02): Table 'rigved_technology.students' doesn't exist
+mysql> select * from student;
++---------+--------+------+
+| Roll_No | Name   | Age  |
++---------+--------+------+
+|       1 | Raj    |   20 |
+|       2 | Ramesh |   20 |
+|       3 | Ravi   |   21 |
+|       4 | Suraj  |   22 |
++---------+--------+------+
+4 rows in set (0.03 sec)
+
+mysql> select * from marks where student_rollno = (select roll_no from student where age=20);
+ERROR 1242 (21000): Subquery returns more than 1 row
+mysql> select * from marks where student_rollno in (select roll_no from student where age=20);
++----------+---------+-------+-----------+----------------+
+| Marks_id | Physics | Maths | Chemistry | student_rollNo |
++----------+---------+-------+-----------+----------------+
+|       22 |      80 |    80 |        80 |              1 |
+|       11 |      70 |    80 |        70 |              2 |
++----------+---------+-------+-----------+----------------+
+2 rows in set (0.03 sec)
+
+mysql> select age, count(*) from student group by age;
++------+----------+
+| age  | count(*) |
++------+----------+
+|   20 |        2 |
+|   21 |        1 |
+|   22 |        1 |
++------+----------+
+3 rows in set (0.03 sec)
+
+mysql> select age, count(age) from student group by age;
++------+------------+
+| age  | count(age) |
++------+------------+
+|   20 |          2 |
+|   21 |          1 |
+|   22 |          1 |
++------+------------+
+3 rows in set (0.00 sec)
+
+mysql> select s.roll_no RollNo,s.name Name,m.physics Physics,m.maths Maths,m.chemistry Chemistry, (Physics+Maths+Chemistry) Total, round((Physics+Maths+Chemistry)/3,2) Average from student s inner join marks m on s.roll_no=m.student_rollno;
++--------+--------+---------+-------+-----------+-------+---------+
+| RollNo | Name   | Physics | Maths | Chemistry | Total | Average |
++--------+--------+---------+-------+-----------+-------+---------+
+|      1 | Raj    |      80 |    80 |        80 |   240 |   80.00 |
+|      2 | Ramesh |      70 |    80 |        70 |   220 |   73.33 |
+|      3 | Ravi   |      90 |    90 |        70 |   250 |   83.33 |
+|      4 | Suraj  |      88 |    88 |        77 |   253 |   84.33 |
++--------+--------+---------+-------+-----------+-------+---------+
+4 rows in set (0.00 sec)
+
+mysql> select s.roll_no RollNo,s.name Name,m.physics Physics,m.maths Maths,m.chemistry Chemistry, (Physics+Maths+Chemistry) Total, round((Physics+Maths+Chemistry)/3,2) Average from student s left join marks m on s.roll_no=m.student_rollno;
++--------+--------+---------+-------+-----------+-------+---------+
+| RollNo | Name   | Physics | Maths | Chemistry | Total | Average |
++--------+--------+---------+-------+-----------+-------+---------+
+|      1 | Raj    |      80 |    80 |        80 |   240 |   80.00 |
+|      2 | Ramesh |      70 |    80 |        70 |   220 |   73.33 |
+|      3 | Ravi   |      90 |    90 |        70 |   250 |   83.33 |
+|      4 | Suraj  |      88 |    88 |        77 |   253 |   84.33 |
++--------+--------+---------+-------+-----------+-------+---------+
+4 rows in set (0.00 sec)
+
+mysql> select s.roll_no RollNo,s.name Name,m.physics Physics,m.maths Maths,m.chemistry Chemistry, (Physics+Maths+Chemistry) Total, round((Physics+Maths+Chemistry)/3,2) Average from student s right join marks m on s.roll_no=m.student_rollno;
++--------+--------+---------+-------+-----------+-------+---------+
+| RollNo | Name   | Physics | Maths | Chemistry | Total | Average |
++--------+--------+---------+-------+-----------+-------+---------+
+|      2 | Ramesh |      70 |    80 |        70 |   220 |   73.33 |
+|      1 | Raj    |      80 |    80 |        80 |   240 |   80.00 |
+|      3 | Ravi   |      90 |    90 |        70 |   250 |   83.33 |
+|      4 | Suraj  |      88 |    88 |        77 |   253 |   84.33 |
++--------+--------+---------+-------+-----------+-------+---------+
+4 rows in set (0.00 sec)
