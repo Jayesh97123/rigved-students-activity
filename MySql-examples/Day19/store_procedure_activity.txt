@@ -3,7 +3,7 @@ Create a procedure which displays the person information based on the id, but di
 ex: If person has below records
 
 ID	NAME	GENDER
-10	Raj	    Male
+10	Raj	 Male
 11	Alia	Female
 
 When you call the procedure by passing 10 then it must show Mr. Raj
