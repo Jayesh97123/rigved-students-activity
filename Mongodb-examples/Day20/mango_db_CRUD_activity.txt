@@ -1,0 +1,104 @@
+1.Create 2 collections with the same name & different case ex: employee & EMPLOYEE and insert documents in both the collections and observe the result.
+
+> db.createCollection('employee');
+{ "ok" : 1 }
+> db.createCollection('EMPLOYEE');
+{ "ok" : 1 }
+> show collections;
+EMPLOYEE
+employee
+myCollections
+
+2.Create a collection user with _id, name, password
+
+> db.createCollection('user');
+{ "ok" : 1 }
+> show collections;
+EMPLOYEE
+employee
+myCollections
+user
+
+3.Store some documents in the user collection
+
+db.user.insertMany([
+	{_id:10,name:'Jay',password:'xdhdfbz'},
+	{_id:11,name:'Monu',password:'xnxfbf'},
+	{_id:12,name:'Nik',password:'xcgzdn'}
+])
+
+> db.user.insertMany([
+... {_id:10,name:'Jay',password:'xdhdfbz'},
+... {_id:11,name:'Monu',password:'xnxfbf'},
+... {_id:12,name:'Nik',password:'xcgzdn'}
+... ]);
+{ "acknowledged" : true, "insertedIds" : [ 10, 11, 12 ] }
+
+4.Find the user based on the _id i.e., view the document on a particular _id
+
+> db.user.find({_id:10});
+{ "_id" : 10, "name" : "Jay", "password" : "xdhdfbz" }
+
+> db.user.find({_id:10},{projection:{_id:0}});
+{ "_id" : 10, "name" : "Jay", "password" : "xdhdfbz" }
+
+> db.user.find({_id:10},{projection:{_id:10}});
+{ "_id" : 10 }
+> db.user.find({_id:10},{projection:{_id:11}});
+{ "_id" : 10 }
+
+> db.user.find({_id:{$gt:11}},{projection:{_id:0}});
+{ "_id" : 12, "name" : "Nik", "password" : "xcgzdn" }
+> db.user.find({_id:{$gt:10}},{projection:{_id:0}});
+{ "_id" : 11, "name" : "Monu", "password" : "xnxfbf" }
+{ "_id" : 12, "name" : "Nik", "password" : "xcgzdn" }
+
+5.Delete the user based on the _id
+
+> db.user.deleteOne({_id:10});
+{ "acknowledged" : true, "deletedCount" : 1 }
+> db.user.find();
+{ "_id" : 11, "name" : "Monu", "password" : "xnxfbf" }
+{ "_id" : 12, "name" : "Nik", "password" : "xcgzdn" }
+
+6.Delete all the users on one go.
+
+> db.user.deleteMany({});
+{ "acknowledged" : true, "deletedCount" : 2 }
+> db.user.find();
+
+7.Store some more documents in the user collection
+
+> db.user.insertMany([
+... {_id:10,name:'Jay',password:'xdhdfbz'},
+... {_id:11,name:'Monu',password:'xnxfbf'},
+... {_id:12,name:'Nik',password:'xcgzdn'}
+... ]);
+{ "acknowledged" : true, "insertedIds" : [ 10, 11, 12 ] }
+> db.user.find();
+{ "_id" : 10, "name" : "Jay", "password" : "xdhdfbz" }
+{ "_id" : 11, "name" : "Monu", "password" : "xnxfbf" }
+{ "_id" : 12, "name" : "Nik", "password" : "xcgzdn" }
+> db.user.deleteOne({});
+{ "acknowledged" : true, "deletedCount" : 1 }
+> db.user.find();
+{ "_id" : 11, "name" : "Monu", "password" : "xnxfbf" }
+{ "_id" : 12, "name" : "Nik", "password" : "xcgzdn" }
+
+> db.user.insertMany([{_id:14,name:'Bhau',password:'bdrbrdga'},{_id:15,name:'Jayu',password:'dhftha'}]);
+{ "acknowledged" : true, "insertedIds" : [ 14, 15 ] }
+> db.user.find();
+{ "_id" : 11, "name" : "Monu", "password" : "xnxfbf" }
+{ "_id" : 12, "name" : "Nik", "password" : "xcgzdn" }
+{ "_id" : 14, "name" : "Bhau", "password" : "bdrbrdga" }
+{ "_id" : 15, "name" : "Jayu", "password" : "dhftha" }
+
+8.Update the password of a particular user using _id
+
+> db.user.updateOne({_id:11},{$set:{'password':'hthfgbf'}});
+{ "acknowledged" : true, "matchedCount" : 1, "modifiedCount" : 1 }
+> db.user.find();
+{ "_id" : 11, "name" : "Monu", "password" : "hthfgbf" }
+{ "_id" : 12, "name" : "Nik", "password" : "xcgzdn" }
+{ "_id" : 14, "name" : "Bhau", "password" : "bdrbrdga" }
+{ "_id" : 15, "name" : "Jayu", "password" : "dhftha" }

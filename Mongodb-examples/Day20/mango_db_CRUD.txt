@@ -1,0 +1,67 @@
+Microsoft Windows [Version 10.0.19044.1586]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Users\DELL>set path=C:\Users\DELL\Downloads\mongodb-win32-x86_64-windows-5.0.6\bin;%path%
+
+C:\Users\DELL>mongo
+MongoDB shell version v5.0.6
+connecting to: mongodb://127.0.0.1:27017/?compressors=disabled&gssapiServiceName=mongodb
+Implicit session: session { "id" : UUID("1279dc47-7c86-4786-9d65-a3979fe0ba06") }
+MongoDB server version: 5.0.5
+================
+Warning: the "mongo" shell has been superseded by "mongosh",
+which delivers improved usability and compatibility.The "mongo" shell has been deprecated and will be removed in
+an upcoming release.
+For installation instructions, see
+https://docs.mongodb.com/mongodb-shell/install/
+================
+---
+The server generated these startup warnings when booting:
+        2022-03-15T09:22:41.342+05:30: Access control is not enabled for the database. Read and write access to data and configuration is unrestricted
+---
+---
+        Enable MongoDB's free cloud-based monitoring service, which will then receive and display
+        metrics about your deployment (disk utilization, CPU, operation statistics, etc).
+
+        The monitoring data will be available on a MongoDB website with a unique URL accessible to you
+        and anyone you share the URL with. MongoDB may use this information to make product
+        improvements and to suggest MongoDB products and deployment options to you.
+
+        To enable free monitoring, run the following command: db.enableFreeMonitoring()
+        To permanently disable this reminder, run the following command: db.disableFreeMonitoring()
+---
+> show dbs;
+admin   0.000GB
+config  0.000GB
+local   0.000GB
+> use mysql;
+switched to db mysql
+> show dbs;
+admin   0.000GB
+config  0.000GB
+local   0.000GB
+> use mydb;
+switched to db mydb
+> db.createCollection('myCollections');
+{ "ok" : 1 }
+> show collections;
+myCollections
+> db.myCollections.insert({_id:15,name:'Jay'});
+WriteResult({ "nInserted" : 1 })
+> db.myCollections.insert({name:'Nik'});
+WriteResult({ "nInserted" : 1 })
+> db.myCollections.find();
+{ "_id" : 15, "name" : "Jay" }
+{ "_id" : ObjectId("62384828cc0a061a2294084c"), "name" : "Nik" }
+> db.myCollections.find(_id:15);
+uncaught exception: SyntaxError: missing ) after argument list :
+@(shell):1:25
+> db.myCollections.find("_id":15);
+uncaught exception: SyntaxError: missing ) after argument list :
+@(shell):1:27
+> db.myCollections.insertOne({_id:12,name:'Bhau'});
+{ "acknowledged" : true, "insertedId" : 12 }
+> db.myCollections.find();
+{ "_id" : 15, "name" : "Jay" }
+{ "_id" : ObjectId("62384828cc0a061a2294084c"), "name" : "Nik" }
+{ "_id" : 12, "name" : "Bhau" }
