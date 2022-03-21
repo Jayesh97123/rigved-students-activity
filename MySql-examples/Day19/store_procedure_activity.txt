@@ -3,7 +3,7 @@ Create a procedure which displays the person information based on the id, but di
 ex: If person has below records
 
 ID	NAME	GENDER
-10	Raj	Male
+10	Raj	    Male
 11	Alia	Female
 
 When you call the procedure by passing 10 then it must show Mr. Raj
@@ -36,42 +36,6 @@ mysql> select * from person;
 +----+---------+--------+
 3 rows in set (0.20 sec)
 
-create procedure salutation(in pid int)
-begin
-declare g varchar(10);
-declare n varchar(10);
-select name into n from person where id=pid;
-select gender into g from person where id=pid;
-if lower(g) = 'male'
-then select concat('Mr.',n);
-else select concat('Ms.',n);
-end if;
-end
-$
-
-mysql> create procedure salutation(in pid int)
-    -> begin
-    -> declare g varchar(10);
-    -> declare n varchar(10);
-    -> select name into n from person where id=pid;
-    -> select gender into g from person where id=pid;
-    -> if lower(g) = 'male'
-    -> then update person set name=concat('Mr.',n) where id=pid;
-    -> else update person set name=concat('Ms.',n) where id=pid;
-    -> end if;
-    -> end
-    -> $
-Query OK, 0 rows affected (0.01 sec)
-
-mysql> select * from person$
-+----+---------+--------+
-| id | name    | gender |
-+----+---------+--------+
-|  1 | Jay     | Male   |
-|  2 | Nik     | Female |
-|  3 | Bhavesh | Male   |
-+----+---------+--------+
-3 rows in set (0.45 sec)
 
 mysql> delimiter $
 mysql> create procedure salutation(in pid int)
