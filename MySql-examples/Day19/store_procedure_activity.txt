@@ -1,5 +1,5 @@
 Create a person table with 3 columns id, name and gender, store few records having genders like male and female
-Create a procedure which displays the perform information based on the id, but displays with salutation i.e., if gender is male it must have Mr. beside the name & if gender is female it must have Ms. beside the name 
+Create a procedure which displays the person information based on the id, but displays with salutation i.e., if gender is male it must have Mr. beside the name & if gender is female it must have Ms. beside the name 
 ex: If person has below records
 
 ID	NAME	GENDER
@@ -43,8 +43,8 @@ declare n varchar(10);
 select name into n from person where id=pid;
 select gender into g from person where id=pid;
 if lower(g) = 'male'
-then update person set name=concat('Mr.',n) where id=pid;
-else update person set name=concat('Ms.',n) where id=pid;
+then select concat('Mr.',n);
+else select concat('Ms.',n);
 end if;
 end
 $
@@ -73,28 +73,37 @@ mysql> select * from person$
 +----+---------+--------+
 3 rows in set (0.45 sec)
 
-mysql> call salutation(1)$
-Query OK, 1 row affected (0.03 sec)
+mysql> delimiter $
+mysql> create procedure salutation(in pid int)
+    -> begin
+    -> declare g varchar(10);
+    -> declare n varchar(10);
+    -> select name into n from person where id=pid;
+    -> select gender into g from person where id=pid;
+    -> if lower(g) = 'male'
+    -> then select concat('Mr.',n);
+    -> else select concat('Ms.',n);
+    -> end if;
+    -> end
+    -> $
+Query OK, 0 rows affected (0.04 sec)
 
-mysql> select * from person$
+mysql> call salutation(1) $
++-----------------+
+| concat('Mr.',n) |
++-----------------+
+| Mr.Jay          |
++-----------------+
+1 row in set (0.03 sec)
+
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> select * from person $
 +----+---------+--------+
 | id | name    | gender |
 +----+---------+--------+
-|  1 | Mr.Jay  | Male   |
+|  1 | Jay     | Male   |
 |  2 | Nik     | Female |
-|  3 | Bhavesh | Male   |
-+----+---------+--------+
-3 rows in set (0.00 sec)
-
-mysql> call salutation(2)$
-Query OK, 1 row affected (0.03 sec)
-
-mysql> select * from person$
-+----+---------+--------+
-| id | name    | gender |
-+----+---------+--------+
-|  1 | Mr.Jay  | Male   |
-|  2 | Ms.Nik  | Female |
 |  3 | Bhavesh | Male   |
 +----+---------+--------+
 3 rows in set (0.00 sec)
