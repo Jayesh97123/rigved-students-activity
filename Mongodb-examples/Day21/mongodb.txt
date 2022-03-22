@@ -1,0 +1,272 @@
+> show databases;
+admin   0.000GB
+config  0.000GB
+local   0.000GB
+mydb    0.000GB
+> use mydb;
+switched to db mydb
+> show collections;
+EMPLOYEE
+employee
+myCollections
+user
+> db.user.find();
+{ "_id" : 11, "name" : "Monu", "password" : "hthfgbf" }
+{ "_id" : 12, "name" : "Nik", "password" : "xcgzdn" }
+{ "_id" : 14, "name" : "Bhau", "password" : "bdrbrdga" }
+{ "_id" : 15, "name" : "Jayu", "password" : "dhftha" }
+> db.user.find().pretty();
+{ "_id" : 11, "name" : "Monu", "password" : "hthfgbf" }
+{ "_id" : 12, "name" : "Nik", "password" : "xcgzdn" }
+{ "_id" : 14, "name" : "Bhau", "password" : "bdrbrdga" }
+{ "_id" : 15, "name" : "Jayu", "password" : "dhftha" }
+> db.user.updateOne({_id:11},{$set:{name:'Jayesh'}});
+{ "acknowledged" : true, "matchedCount" : 1, "modifiedCount" : 1 }
+> db.user.find();
+{ "_id" : 11, "name" : "Jayesh", "password" : "hthfgbf" }
+{ "_id" : 12, "name" : "Nik", "password" : "xcgzdn" }
+{ "_id" : 14, "name" : "Bhau", "password" : "bdrbrdga" }
+{ "_id" : 15, "name" : "Jayu", "password" : "dhftha" }
+
+> db.user.find({name:'Jayesh'});
+{ "_id" : 11, "name" : "Jayesh", "password" : "hthfgbf" }
+
+> db.user.find({},{name:1});
+{ "_id" : 11, "name" : "Jayesh" }
+{ "_id" : 12, "name" : "Nik" }
+{ "_id" : 14, "name" : "Bhau" }
+{ "_id" : 15, "name" : "Jayu" }
+> db.user.find({},{name:1,_id:0});
+{ "name" : "Jayesh" }
+{ "name" : "Nik" }
+{ "name" : "Bhau" }
+{ "name" : "Jayu" }
+
+> var x=1
+> function incre(){
+... x=x+1
+... return x
+... }
+> incre()
+2
+> incre()
+3
+> incre()
+4
+> incre()
+5
+
+> new Date();
+ISODate("2022-03-22T09:17:12.397Z")
+> new Date().toLocaleDateString();
+Tuesday, March 22, 2022
+> db.user.find();
+{ "_id" : 11, "name" : "Jayesh", "password" : "hthfgbf" }
+{ "_id" : 12, "name" : "Nik", "password" : "xcgzdn" }
+{ "_id" : 14, "name" : "Bhau", "password" : "bdrbrdga" }
+{ "_id" : 15, "name" : "Jayu", "password" : "dhftha" }
+> db.user.insertOne({_id:16,name:'Monu',address:{state:'MH',city:'Mumbai'}});
+{ "acknowledged" : true, "insertedId" : 16 }
+> db.user.find();
+{ "_id" : 11, "name" : "Jayesh", "password" : "hthfgbf" }
+{ "_id" : 12, "name" : "Nik", "password" : "xcgzdn" }
+{ "_id" : 14, "name" : "Bhau", "password" : "bdrbrdga" }
+{ "_id" : 15, "name" : "Jayu", "password" : "dhftha" }
+{ "_id" : 16, "name" : "Monu", "address" : { "state" : "MH", "city" : "Mumbai" } }
+> db.user.find().pretty();
+{ "_id" : 11, "name" : "Jayesh", "password" : "hthfgbf" }
+{ "_id" : 12, "name" : "Nik", "password" : "xcgzdn" }
+{ "_id" : 14, "name" : "Bhau", "password" : "bdrbrdga" }
+{ "_id" : 15, "name" : "Jayu", "password" : "dhftha" }
+{
+        "_id" : 16,
+        "name" : "Monu",
+        "address" : {
+                "state" : "MH",
+                "city" : "Mumbai"
+        }
+}
+
+> db.user.find({'address.city':'Mumbai'});
+{ "_id" : 16, "name" : "Monu", "address" : { "state" : "MH", "city" : "Mumbai" } }
+> db.user.find({'address.city':'Mumbai'}).pretty();
+{
+        "_id" : 16,
+        "name" : "Monu",
+        "address" : {
+                "state" : "MH",
+                "city" : "Mumbai"
+        }
+}
+
+> db.user.insertOne({_id:17,name:'Monu',dob:new Date()});
+{ "acknowledged" : true, "insertedId" : 17 }
+> db.user.find().pretty();
+{ "_id" : 11, "name" : "Jayesh", "password" : "hthfgbf" }
+{ "_id" : 12, "name" : "Nik", "password" : "xcgzdn" }
+{ "_id" : 14, "name" : "Bhau", "password" : "bdrbrdga" }
+{ "_id" : 15, "name" : "Jayu", "password" : "dhftha" }
+{
+        "_id" : 16,
+        "name" : "Monu",
+        "address" : {
+                "state" : "MH",
+                "city" : "Mumbai"
+        }
+}
+{ "_id" : 17, "name" : "Monu", "dob" : ISODate("2022-03-22T09:28:27.857Z") }
+
+> db.user.insertOne({_id:18,name:'Monu',dob:new Date().toLocaleDateString()});
+{ "acknowledged" : true, "insertedId" : 18 }
+> db.user.find().pretty();
+{ "_id" : 11, "name" : "Jayesh", "password" : "hthfgbf" }
+{ "_id" : 12, "name" : "Nik", "password" : "xcgzdn" }
+{ "_id" : 14, "name" : "Bhau", "password" : "bdrbrdga" }
+{ "_id" : 15, "name" : "Jayu", "password" : "dhftha" }
+{
+        "_id" : 16,
+        "name" : "Monu",
+        "address" : {
+                "state" : "MH",
+                "city" : "Mumbai"
+        }
+}
+{ "_id" : 17, "name" : "Monu", "dob" : ISODate("2022-03-22T09:28:27.857Z") }
+{ "_id" : 18, "name" : "Monu", "dob" : "Tuesday, March 22, 2022" }
+
+> db.user.find().sort({_id:-1});
+{ "_id" : 18, "name" : "Monu", "dob" : "Tuesday, March 22, 2022" }
+{ "_id" : 17, "name" : "Monu", "dob" : ISODate("2022-03-22T09:28:27.857Z") }
+{ "_id" : 16, "name" : "Monu", "address" : { "state" : "MH", "city" : "Mumbai" } }
+{ "_id" : 15, "name" : "Jayu", "password" : "dhftha" }
+{ "_id" : 14, "name" : "Bhau", "password" : "bdrbrdga" }
+{ "_id" : 12, "name" : "Nik", "password" : "xcgzdn" }
+{ "_id" : 11, "name" : "Jayesh", "password" : "hthfgbf" }
+> db.user.find().sort({_id:1});
+{ "_id" : 11, "name" : "Jayesh", "password" : "hthfgbf" }
+{ "_id" : 12, "name" : "Nik", "password" : "xcgzdn" }
+{ "_id" : 14, "name" : "Bhau", "password" : "bdrbrdga" }
+{ "_id" : 15, "name" : "Jayu", "password" : "dhftha" }
+{ "_id" : 16, "name" : "Monu", "address" : { "state" : "MH", "city" : "Mumbai" } }
+{ "_id" : 17, "name" : "Monu", "dob" : ISODate("2022-03-22T09:28:27.857Z") }
+{ "_id" : 18, "name" : "Monu", "dob" : "Tuesday, March 22, 2022" }
+>
+> db.user.find().sort({name:1});
+{ "_id" : 14, "name" : "Bhau", "password" : "bdrbrdga" }
+{ "_id" : 11, "name" : "Jayesh", "password" : "hthfgbf" }
+{ "_id" : 15, "name" : "Jayu", "password" : "dhftha" }
+{ "_id" : 16, "name" : "Monu", "address" : { "state" : "MH", "city" : "Mumbai" } }
+{ "_id" : 17, "name" : "Monu", "dob" : ISODate("2022-03-22T09:28:27.857Z") }
+{ "_id" : 18, "name" : "Monu", "dob" : "Tuesday, March 22, 2022" }
+{ "_id" : 12, "name" : "Nik", "password" : "xcgzdn" }
+> db.user.find().sort({name:-1});
+{ "_id" : 12, "name" : "Nik", "password" : "xcgzdn" }
+{ "_id" : 16, "name" : "Monu", "address" : { "state" : "MH", "city" : "Mumbai" } }
+{ "_id" : 17, "name" : "Monu", "dob" : ISODate("2022-03-22T09:28:27.857Z") }
+{ "_id" : 18, "name" : "Monu", "dob" : "Tuesday, March 22, 2022" }
+{ "_id" : 15, "name" : "Jayu", "password" : "dhftha" }
+{ "_id" : 11, "name" : "Jayesh", "password" : "hthfgbf" }
+{ "_id" : 14, "name" : "Bhau", "password" : "bdrbrdga" }
+> db.user.find().sort({name:-1}).limit(3);
+{ "_id" : 12, "name" : "Nik", "password" : "xcgzdn" }
+{ "_id" : 17, "name" : "Monu", "dob" : ISODate("2022-03-22T09:28:27.857Z") }
+{ "_id" : 16, "name" : "Monu", "address" : { "state" : "MH", "city" : "Mumbai" } }
+> db.user.find().sort({name:-1}).limit(5);
+{ "_id" : 12, "name" : "Nik", "password" : "xcgzdn" }
+{ "_id" : 17, "name" : "Monu", "dob" : ISODate("2022-03-22T09:28:27.857Z") }
+{ "_id" : 18, "name" : "Monu", "dob" : "Tuesday, March 22, 2022" }
+{ "_id" : 16, "name" : "Monu", "address" : { "state" : "MH", "city" : "Mumbai" } }
+{ "_id" : 15, "name" : "Jayu", "password" : "dhftha" }
+
+> db.user.find();
+{ "_id" : 11, "name" : "Jayesh", "password" : "hthfgbf" }
+{ "_id" : 12, "name" : "Nik", "password" : "xcgzdn" }
+{ "_id" : 14, "name" : "Bhau", "password" : "bdrbrdga" }
+{ "_id" : 15, "name" : "Jayu", "password" : "dhftha" }
+{ "_id" : 16, "name" : "Monu", "address" : { "state" : "MH", "city" : "Mumbai" } }
+{ "_id" : 17, "name" : "Monu", "dob" : ISODate("2022-03-22T09:28:27.857Z") }
+{ "_id" : 18, "name" : "Monu", "dob" : "Tuesday, March 22, 2022" }
+> db.user.find({name:{$eq:'Monu'}});
+{ "_id" : 16, "name" : "Monu", "address" : { "state" : "MH", "city" : "Mumbai" } }
+{ "_id" : 17, "name" : "Monu", "dob" : ISODate("2022-03-22T09:28:27.857Z") }
+{ "_id" : 18, "name" : "Monu", "dob" : "Tuesday, March 22, 2022" }
+> db.user.find({_id:{$lt:15}});
+{ "_id" : 11, "name" : "Jayesh", "password" : "hthfgbf" }
+{ "_id" : 12, "name" : "Nik", "password" : "xcgzdn" }
+{ "_id" : 14, "name" : "Bhau", "password" : "bdrbrdga" }
+> db.user.find({_id:{$gt:15}});
+{ "_id" : 16, "name" : "Monu", "address" : { "state" : "MH", "city" : "Mumbai" } }
+{ "_id" : 17, "name" : "Monu", "dob" : ISODate("2022-03-22T09:28:27.857Z") }
+{ "_id" : 18, "name" : "Monu", "dob" : "Tuesday, March 22, 2022" }
+> db.user.find({_id:{$gte:15}});
+{ "_id" : 15, "name" : "Jayu", "password" : "dhftha" }
+{ "_id" : 16, "name" : "Monu", "address" : { "state" : "MH", "city" : "Mumbai" } }
+{ "_id" : 17, "name" : "Monu", "dob" : ISODate("2022-03-22T09:28:27.857Z") }
+{ "_id" : 18, "name" : "Monu", "dob" : "Tuesday, March 22, 2022" }
+> db.user.find({_id:{$lte:15}});
+{ "_id" : 11, "name" : "Jayesh", "password" : "hthfgbf" }
+{ "_id" : 12, "name" : "Nik", "password" : "xcgzdn" }
+{ "_id" : 14, "name" : "Bhau", "password" : "bdrbrdga" }
+{ "_id" : 15, "name" : "Jayu", "password" : "dhftha" }
+> db.user.find({_id:{$ne:15}});
+{ "_id" : 11, "name" : "Jayesh", "password" : "hthfgbf" }
+{ "_id" : 12, "name" : "Nik", "password" : "xcgzdn" }
+{ "_id" : 14, "name" : "Bhau", "password" : "bdrbrdga" }
+{ "_id" : 16, "name" : "Monu", "address" : { "state" : "MH", "city" : "Mumbai" } }
+{ "_id" : 17, "name" : "Monu", "dob" : ISODate("2022-03-22T09:28:27.857Z") }
+{ "_id" : 18, "name" : "Monu", "dob" : "Tuesday, March 22, 2022" }
+> db.user.find({_id:{$in:[15,16]}});
+{ "_id" : 15, "name" : "Jayu", "password" : "dhftha" }
+{ "_id" : 16, "name" : "Monu", "address" : { "state" : "MH", "city" : "Mumbai" } }
+> db.user.find({_id:{$nin:[15,16]}});
+{ "_id" : 11, "name" : "Jayesh", "password" : "hthfgbf" }
+{ "_id" : 12, "name" : "Nik", "password" : "xcgzdn" }
+{ "_id" : 14, "name" : "Bhau", "password" : "bdrbrdga" }
+{ "_id" : 17, "name" : "Monu", "dob" : ISODate("2022-03-22T09:28:27.857Z") }
+{ "_id" : 18, "name" : "Monu", "dob" : "Tuesday, March 22, 2022" }
+> db.user.find({$or:[{_id:15},{name:'Monu'}]});
+{ "_id" : 15, "name" : "Jayu", "password" : "dhftha" }
+{ "_id" : 16, "name" : "Monu", "address" : { "state" : "MH", "city" : "Mumbai" } }
+{ "_id" : 17, "name" : "Monu", "dob" : ISODate("2022-03-22T09:28:27.857Z") }
+{ "_id" : 18, "name" : "Monu", "dob" : "Tuesday, March 22, 2022" }
+> db.user.find({$and:[{_id:{$gt:15}},{name:'Monu'}]});
+{ "_id" : 16, "name" : "Monu", "address" : { "state" : "MH", "city" : "Mumbai" } }
+{ "_id" : 17, "name" : "Monu", "dob" : ISODate("2022-03-22T09:28:27.857Z") }
+{ "_id" : 18, "name" : "Monu", "dob" : "Tuesday, March 22, 2022" }
+> db.user.find({$nor:[{_id:{$gt:15}},{name:'Monu'}]});
+{ "_id" : 11, "name" : "Jayesh", "password" : "hthfgbf" }
+{ "_id" : 12, "name" : "Nik", "password" : "xcgzdn" }
+{ "_id" : 14, "name" : "Bhau", "password" : "bdrbrdga" }
+{ "_id" : 15, "name" : "Jayu", "password" : "dhftha" }
+> db.user.find({_id:{$not:{$gt:15}}});
+{ "_id" : 11, "name" : "Jayesh", "password" : "hthfgbf" }
+{ "_id" : 12, "name" : "Nik", "password" : "xcgzdn" }
+{ "_id" : 14, "name" : "Bhau", "password" : "bdrbrdga" }
+{ "_id" : 15, "name" : "Jayu", "password" : "dhftha" }
+> db.user.find({name:{$regex:'u'}});
+{ "_id" : 14, "name" : "Bhau", "password" : "bdrbrdga" }
+{ "_id" : 15, "name" : "Jayu", "password" : "dhftha" }
+{ "_id" : 16, "name" : "Monu", "address" : { "state" : "MH", "city" : "Mumbai" } }
+{ "_id" : 17, "name" : "Monu", "dob" : ISODate("2022-03-22T09:28:27.857Z") }
+{ "_id" : 18, "name" : "Monu", "dob" : "Tuesday, March 22, 2022" }
+> db.user.find({name:{$regex:'a'}});
+{ "_id" : 11, "name" : "Jayesh", "password" : "hthfgbf" }
+{ "_id" : 14, "name" : "Bhau", "password" : "bdrbrdga" }
+{ "_id" : 15, "name" : "Jayu", "password" : "dhftha" }
+> db.user.find({name:{$regex:'k$'}});
+{ "_id" : 12, "name" : "Nik", "password" : "xcgzdn" }
+> db.user.find({name:{$regex:'^J'}});
+{ "_id" : 11, "name" : "Jayesh", "password" : "hthfgbf" }
+{ "_id" : 15, "name" : "Jayu", "password" : "dhftha" }
+> db.user.find({name:/ay/});
+{ "_id" : 11, "name" : "Jayesh", "password" : "hthfgbf" }
+{ "_id" : 15, "name" : "Jayu", "password" : "dhftha" }
+> db.user.find({name:/^J/});
+{ "_id" : 11, "name" : "Jayesh", "password" : "hthfgbf" }
+{ "_id" : 15, "name" : "Jayu", "password" : "dhftha" }
+> db.user.find({name:/k$/});
+{ "_id" : 12, "name" : "Nik", "password" : "xcgzdn" }
+> db.user.find({$where: function(){return this.name=='Monu'}});
+{ "_id" : 16, "name" : "Monu", "address" : { "state" : "MH", "city" : "Mumbai" } }
+{ "_id" : 17, "name" : "Monu", "dob" : ISODate("2022-03-22T09:28:27.857Z") }
+{ "_id" : 18, "name" : "Monu", "dob" : "Tuesday, March 22, 2022" }

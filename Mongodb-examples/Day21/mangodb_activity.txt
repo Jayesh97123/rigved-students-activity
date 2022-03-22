@@ -1,0 +1,278 @@
+a.Autogenerate values to _id for a user like 1, 2, 3, 4 and so, so that you don’t manually pass the _id, the autogenerating function should generate the next sequence of number even if you terminate the database and restart it, i.e., don’t just create a temporary variable and increment it
+
+> db.createCollection('sequence');
+{ "ok" : 1 }
+> db.sequence.insertOne ( {_id: 'orderId' , value : 0 } );
+{ "acknowledged" : true, "insertedId" : "orderId" }
+> db.sequence.insert ( {_id: "item_id" , sequence_value : 0 } );
+WriteResult({ "nInserted" : 1 })
+
+db.system.js.save(
+ {
+  _id : 'NextSequence',
+  value : function (sequenceOfName){ 
+	var sequenceDoc = db.sequence.findAndModify({
+      query:{_id: sequenceOfName },
+       update: {$inc:{sequence_value:1}},
+       new:true
+     });
+
+      return sequenceDoc.sequence_value;
+	}
+  });
+
+> db.loadServerScripts();
+> db.createCollection('STORE');
+{ "ok" : 1 }
+> db.STORE.insert({
+...  "_id": NextSequence("item_id"),
+...  "item_short_name": "ABC",
+...  "specification": "book",
+...  "category": "fictional",
+...  "seller": "best_buy",
+...  "network": "XYZ",
+...  "plan": "regular"
+... });
+WriteResult({ "nInserted" : 1 })
+> db.STORE.insert({
+... "_id": NextSequence("item_id"),
+... "item_short_name": "DEF",
+... "specification": "book",
+... "category": "fictional",
+... "seller": "best_buy",
+... "network": "GHI",
+... "plan": "premium"
+... });
+WriteResult({ "nInserted" : 1 })
+> db.STORE.find().pretty();
+{
+        "_id" : 1,
+        "item_short_name" : "ABC",
+        "specification" : "book",
+        "category" : "fictional",
+        "seller" : "best_buy",
+        "network" : "XYZ",
+        "plan" : "regular"
+}
+{
+        "_id" : 2,
+        "item_short_name" : "DEF",
+        "specification" : "book",
+        "category" : "fictional",
+        "seller" : "best_buy",
+        "network" : "GHI",
+        "plan" : "premium"
+}
+
+db.STORE.insert({
+"_id": NextSequence("item_id"),
+ "item_short_name": "JKL",
+ "specification": "books",
+"category": "non-fictional",
+"seller": "best_buy",
+ "network": "MNO",
+ "plan": "corporate"
+ })
+WriteResult({ "nInserted" : 1 })
+> db.STORE.find().pretty();
+{
+        "_id" : 1,
+        "item_short_name" : "ABC",
+        "specification" : "book",
+        "category" : "fictional",
+        "seller" : "best_buy",
+        "network" : "XYZ",
+        "plan" : "regular"
+}
+{
+        "_id" : 2,
+        "item_short_name" : "DEF",
+        "specification" : "book",
+        "category" : "fictional",
+        "seller" : "best_buy",
+        "network" : "GHI",
+        "plan" : "premium"
+}
+{
+        "_id" : 3,
+        "item_short_name" : "JKL",
+        "specification" : "books",
+        "category" : "non-fictional",
+        "seller" : "best_buy",
+        "network" : "MNO",
+        "plan" : "corporate"
+}
+
+C:\Users\DELL>mongo
+MongoDB shell version v5.0.6
+connecting to: mongodb://127.0.0.1:27017/?compressors=disabled&gssapiServiceName=mongodb
+Implicit session: session { "id" : UUID("56369045-6935-4fa6-8f9e-55d5e7181ae6") }
+MongoDB server version: 5.0.5
+================
+Warning: the "mongo" shell has been superseded by "mongosh",
+which delivers improved usability and compatibility.The "mongo" shell has been deprecated and will be removed in
+an upcoming release.
+For installation instructions, see
+https://docs.mongodb.com/mongodb-shell/install/
+================
+---
+The server generated these startup warnings when booting:
+        2022-03-15T09:22:41.342+05:30: Access control is not enabled for the database. Read and write access to data and configuration is unrestricted
+---
+---
+        Enable MongoDB's free cloud-based monitoring service, which will then receive and display
+        metrics about your deployment (disk utilization, CPU, operation statistics, etc).
+
+        The monitoring data will be available on a MongoDB website with a unique URL accessible to you
+        and anyone you share the URL with. MongoDB may use this information to make product
+        improvements and to suggest MongoDB products and deployment options to you.
+
+        To enable free monitoring, run the following command: db.enableFreeMonitoring()
+        To permanently disable this reminder, run the following command: db.disableFreeMonitoring()
+---
+> use mydb;
+switched to db mydb
+> show collections;
+EMPLOYEE
+STORE
+employee
+myCollections
+sequence
+system.js
+user
+> db.STORE.insert({
+... "_id": NextSequence("item_id"),
+...  "item_short_name": "JKL",
+...  "specification": "books",
+... "category": "non-fictional",
+... "seller": "best_buy",
+...  "network": "MNO",
+...  "plan": "corporate"
+...  });
+uncaught exception: ReferenceError: NextSequence is not defined :
+@(shell):2:1
+> db.loadServerScripts();
+> db.STORE.insert({
+... "_id": NextSequence("item_id"),
+...  "item_short_name": "JKL",
+...  "specification": "books",
+... "category": "non-fictional",
+... "seller": "best_buy",
+...  "network": "MNO",
+...  "plan": "corporate"
+...  });
+WriteResult({ "nInserted" : 1 })
+> db.STORE.find();
+{ "_id" : 1, "item_short_name" : "ABC", "specification" : "book", "category" : "fictional", "seller" : "best_buy", "network" : "XYZ", "plan" : "regular" }
+{ "_id" : 2, "item_short_name" : "DEF", "specification" : "book", "category" : "fictional", "seller" : "best_buy", "network" : "GHI", "plan" : "premium" }
+{ "_id" : 3, "item_short_name" : "JKL", "specification" : "books", "category" : "non-fictional", "seller" : "best_buy", "network" : "MNO", "plan" : "corporate" }
+{ "_id" : 4, "item_short_name" : "JKL", "specification" : "books", "category" : "non-fictional", "seller" : "best_buy", "network" : "MNO", "plan" : "corporate" }
+> db.STORE.find().pretty();
+{
+        "_id" : 1,
+        "item_short_name" : "ABC",
+        "specification" : "book",
+        "category" : "fictional",
+        "seller" : "best_buy",
+        "network" : "XYZ",
+        "plan" : "regular"
+}
+{
+        "_id" : 2,
+        "item_short_name" : "DEF",
+        "specification" : "book",
+        "category" : "fictional",
+        "seller" : "best_buy",
+        "network" : "GHI",
+        "plan" : "premium"
+}
+{
+        "_id" : 3,
+        "item_short_name" : "JKL",
+        "specification" : "books",
+        "category" : "non-fictional",
+        "seller" : "best_buy",
+        "network" : "MNO",
+        "plan" : "corporate"
+}
+{
+        "_id" : 4,
+        "item_short_name" : "JKL",
+        "specification" : "books",
+        "category" : "non-fictional",
+        "seller" : "best_buy",
+        "network" : "MNO",
+        "plan" : "corporate"
+}
+
+b.Generate values to _id for a student like a university number, ex: if the university is ABC, then the numbers must be ABC1, ABC2, ABC3 and so on, this must also be auto-generate through the javascript function, it must generate the next sequence even if you terminating the database and restart it
+
+> db.createCollection('university');
+{ "ok" : 1 }
+> db.university.insertOne({_id: 'Mumbai' , value : 0 });
+{ "acknowledged" : true, "insertedId" : "Mumbai" }
+
+db.system.js.save(
+ {
+  _id : 'NextSequenceUniversity',
+  value : function (sequenceOfName){ 
+	var sequenceDoc = db.university.findAndModify({
+      query:{_id: sequenceOfName },
+       update: {$inc:{sequence_value:1}},
+       new:true
+     });
+
+      return sequenceOfName+sequenceDoc.sequence_value;
+	}
+  });
+
+> db.system.js.save(
+...  {
+...   _id : 'NextSequenceUniversity',
+...   value : function (sequenceOfName){
+... var sequenceDoc = db.university.findAndModify({
+...       query:{_id: sequenceOfName },
+...        update: {$inc:{sequence_value:1}},
+...        new:true
+...      });
+...
+...       return sequenceOfName+sequenceDoc.sequence_value;
+... }
+...   });
+WriteResult({
+        "nMatched" : 0,
+        "nUpserted" : 1,
+        "nModified" : 0,
+        "_id" : "NextSequenceUniversity"
+})
+
+db.student.insertOne({
+	'_id':NextSequenceUniversity('Mumbai'),
+	name:'Jayesh',
+	math:75,
+	english:65
+})
+db.student.insertOne({
+	'_id':NextSequenceUniversity('Mumbai'),
+	name:'Monu',
+	math:65,
+	english:75
+})
+> db.loadServerScripts();
+> db.student.insertOne({
+... '_id':NextSequenceUniversity('Mumbai'),
+... name:'Jayesh',
+... math:75,
+... english:65
+... });
+{ "acknowledged" : true, "insertedId" : "Mumbai1" }
+> db.student.insertOne({
+... '_id':NextSequenceUniversity('Mumbai'),
+... name:'Monu',
+... math:65,
+... english:75
+... });
+{ "acknowledged" : true, "insertedId" : "Mumbai2" }
+> db.student.find();
+{ "_id" : "Mumbai1", "name" : "Jayesh", "math" : 75, "english" : 65 }
+{ "_id" : "Mumbai2", "name" : "Monu", "math" : 65, "english" : 75 }
