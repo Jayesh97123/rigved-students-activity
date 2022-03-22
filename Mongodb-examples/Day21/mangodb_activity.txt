@@ -2,8 +2,7 @@ a.Autogenerate values to _id for a user like 1, 2, 3, 4 and so, so that you donâ
 
 > db.createCollection('sequence');
 { "ok" : 1 }
-> db.sequence.insertOne ( {_id: 'orderId' , value : 0 } );
-{ "acknowledged" : true, "insertedId" : "orderId" }
+
 > db.sequence.insert ( {_id: "item_id" , sequence_value : 0 } );
 WriteResult({ "nInserted" : 1 })
 
