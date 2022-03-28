@@ -5,6 +5,7 @@ let parser=require('body-parser');
 let port=3003;
 app.listen(port,()=>console.log(`Server is running at ${port}`));
 app.use(parser.json());
+//a.store userid, name and age through post for the url /user
 app.post('/user',(request,response)=>{
     let data=fs.readFileSync('activity.json');
     let dataString=data.toString();
@@ -20,6 +21,7 @@ app.post('/user',(request,response)=>{
     fs.writeFileSync('activity.json',jsonObject);
     response.json('Done..')
 });
+//b.show all the users present in the file in the postman for the url /user
 app.get('/user',(request,response)=>{
     let data=fs.readFileSync('activity.json');
     let datastring=data.toString();
@@ -27,6 +29,7 @@ app.get('/user',(request,response)=>{
     //let jsonObject=JSON.stringify(jsObject);
     response.json(jsObject);
 });
+//c.show a particular user based on the id for the url /user/:id
 app.get('/user/:id',(request,response)=>{
     let id1=request.params.id;
     let data=fs.readFileSync('activity.json');
@@ -39,6 +42,7 @@ app.get('/user/:id',(request,response)=>{
         }
     }
 });
+//d.delete a particular user based on the id for the url /user/:id
 app.delete('/user/:id',(request,response)=>{
     let id1=request.params.id;
     let data=fs.readFileSync('activity.json');
@@ -47,6 +51,8 @@ app.delete('/user/:id',(request,response)=>{
     for(let i=0;i<jsObject.length;i++){
         if(jsObject[i].userId==id1){
             jsObject.splice(i,1);
+            let jsonObject=JSON.stringify(jsObject);
+            fs.writeFileSync('activity.json',jsonObject);
             response.json(jsObject);
         }
     }
