@@ -1,0 +1,9 @@
+<div>
+    <h2>Class Binding </h2>
+    <button (click)="applyCSS()">Apply</button>
+    <div [class.rc]="apply">
+        Hello Red
+    </div>
+    <div [class.gc]="apply">Hello Green</div>
+    <div [class.bc]="apply">Hello Blue</div>
+</div>
