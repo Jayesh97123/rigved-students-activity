@@ -1,0 +1,10 @@
+<div *ngFor="let p of products">
+    <div class="card" style="width: 18rem;">
+        <div class="card-body">
+          <h5 class="card-title">Product Name: <p>{{p.name}}</p></h5>
+          <h5 class="card-title" >Price: <p id="i1">{{p.price}}</p></h5>
+          <button (click)="add(p.price)">Add to cart</button>&nbsp;
+          <button (click)="remov(p.price)">Remove from cart</button>
+        </div>
+      </div>
+</div>
