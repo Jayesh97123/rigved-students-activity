@@ -1,0 +1,13 @@
+<div>
+    <h3>Success Component</h3>
+    <div *ngIf="username">Hello, {{username}}</div>
+    <div>
+        <a routerLink="dashboard">Dashboard</a> |
+        <a routerLink="search">Search</a> |
+        <a routerLink="list">List</a> |
+        <a routerLink="/login">Logout</a> |
+    </div>
+    <div>
+        <router-outlet></router-outlet>
+    </div>
+</div>

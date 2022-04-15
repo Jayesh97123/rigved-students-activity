@@ -1,0 +1,20 @@
+<div>
+    <h2>Register Form</h2>
+    <div class="row">
+        <div class="col-5">
+            <form [formGroup]="profileForm" (ngSubmit)="handleRegister()">
+                <div>
+                    Name: <input type="text" formControlName="name" class="form-control">
+                </div>
+                <div>
+                    Password: <input type="password" formControlName="password" class="form-control">
+                </div>
+                <div>
+                    Phone Number: <input type="number" formControlName="phone" class="form-control">
+                </div>
+                <br>
+                <input type="submit" value="Register">
+            </form>
+        </div>
+    </div>
+</div>

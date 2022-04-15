@@ -1,0 +1,14 @@
+<div>
+    <h2>Login Component</h2>
+    <form>
+        <div class="row">
+            <div class="col-5">
+                Username: <input type="text" [formControl]="username" class="form-control">
+                <br>
+                <input type="button" value="Login" (click)="handleLogin()">
+            </div>
+        </div>
+    </form>
+    <hr>
+    <button><a routerLink="/register">Create User</a></button>
+</div>
