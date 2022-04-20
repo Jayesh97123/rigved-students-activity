@@ -1,0 +1,30 @@
+<div class="row" class="d-flex justify-content-center">
+    <div class="col-5" >
+        <h3 class="d-flex justify-content-center">Get Value</h3>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>N1</th>
+                    <th>N2</th>
+                    <th>Addition</th>
+                    <th>Subtract</th>
+                    <th>Multiply</th>
+                    <th>Division</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let l of list">
+                    <td>{{l._id}}</td>
+                    <td>{{l.n1}}</td>
+                    <td>{{l.n2}}</td>
+                    <td>{{l.add}}</td>
+                    <td>{{l.sub}}</td>
+                    <td>{{l.mult}}</td>
+                    <td>{{l.div}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <!-- <p>{{list | json}}</p> -->
+</div>

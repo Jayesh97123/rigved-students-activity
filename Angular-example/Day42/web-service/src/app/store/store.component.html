@@ -1,0 +1,22 @@
+<div class="row" class="d-flex justify-content-center">
+    <div class="col-5" >
+        <h3>Store Value</h3>
+        <form [formGroup]="Form" (ngSubmit)="handleStore()">
+            <div>
+                Id: <input type="number" formControlName="_id">
+            </div>
+            <div>
+                Enter N1: <input type="number" formControlName="n1">
+            </div>
+            <div>
+                Enter N2: <input type="number" formControlName="n2">
+            </div>
+            <br>
+            <div>
+                <input type="submit" value="Store">
+            </div>
+        </form>
+        <!-- <p>{{output | json}}</p> -->
+        <p *ngIf="output.insertedId">Store Successfully</p>
+    </div>
+</div>

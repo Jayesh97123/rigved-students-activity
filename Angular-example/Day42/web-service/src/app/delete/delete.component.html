@@ -1,0 +1,16 @@
+<div class="row" class="d-flex justify-content-center">
+    <div class="col-5">
+        <h3>Delete By Id</h3>
+        <div>
+            Id: <input type="number" [formControl]="id">
+        </div>
+        <br>
+        <div>
+            <input type="submit" value="Delete" (click)="handleDelete()">
+        </div>
+        <div>
+            <!-- <p>{{output | json}}</p> -->
+            <p *ngIf="output.deletedCount">Deleted Id {{id.value}} Succesfully</p>
+        </div>
+    </div>
+</div>

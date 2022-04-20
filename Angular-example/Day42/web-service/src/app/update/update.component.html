@@ -1,0 +1,22 @@
+<div class="row" class="d-flex justify-content-center">
+    <div class="col-5">
+        <h3>Update N1 and N2</h3>
+        <div>
+            Id: <input type="number" [formControl]="id">
+        </div>
+        <div>
+            Enter N1: <input type="number" [formControl]="n1">
+        </div>
+        <div>
+            Enter N2: <input type="number" [formControl]="n2">
+        </div>
+        <br>
+        <div>
+            <input type="submit" value="Update" (click)="handleUpdate()">
+        </div>
+        <div>
+            <!-- <p>{{output | json}}</p> -->
+            <p *ngIf="output.matchedCount">Update Successfully</p>
+        </div>
+    </div>
+</div>
