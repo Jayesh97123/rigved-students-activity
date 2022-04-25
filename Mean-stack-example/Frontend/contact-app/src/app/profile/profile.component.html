@@ -1,0 +1,40 @@
+<div class = "container-fluid">
+    <div class = "row">
+        <div class = "col-4">
+            <div *ngIf = "profile">
+                <table Cellpadding="4">
+                    <tr>
+                        <th>Name : </th>
+                        <td>{{profile.name}}</td>
+                    </tr>
+                    <tr>
+                        <th>Birthday : </th>
+                        <td>{{profile.dob}}</td>
+                    </tr>
+                    <tr>
+                        <th>Phone : </th>
+                        <td>{{profile.phone}}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+       
+        <div class = "col-8">
+            
+              
+            <div class="nav justify-content-center" id="i123">
+                <a routerLink = "dashboard" class="nav-link">Dashboard</a> 
+                <a routerLink = "addContact" class="nav-link">Add Contact</a>
+                <a routerLink = "showContacts" class="nav-link">Show Contacts</a>
+                <a routerLink = "updateProfile" class="nav-link">Update Profile</a>
+                <a routerLink = "settings" class="nav-link">Settings</a> 
+                <a routerLink = "updateContactPhone" class="nav-link">Update Contact Phone</a> 
+                <a routerLink = "searchcontact" class="nav-link">Search Contact</a> 
+                <a routerLink = "/login" class="nav-link">Logout</a>
+            </div>
+            <hr>
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+
+</div>

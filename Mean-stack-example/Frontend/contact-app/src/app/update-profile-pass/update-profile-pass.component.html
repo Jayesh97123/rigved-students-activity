@@ -1,0 +1,17 @@
+<div>
+    <div>
+        <mat-form-field appearance="fill" class="example-full-width">
+            <mat-label>Password</mat-label>
+            <input matInput [formControl]="password" [type]="showPassword ? 'text' : 'password'" name="password">
+            <mat-icon matSuffix (click)="togglePasswordVisibility()">
+                {{showPassword?'visibility_off':'visibility'}}
+            </mat-icon>
+        </mat-form-field>
+    </div>
+    <div>
+        <button mat-raised-button color="primary" (click)="updatePass()">Update</button>
+    </div>
+    <div *ngIf="data" class="text-primary">
+        Password is updated
+    </div>
+</div>

@@ -1,0 +1,14 @@
+<div>
+    <div>
+        <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Phone</mat-label>
+            <input matInput [formControl]="phone" placeholder="Enter phone number" value="22558822">
+        </mat-form-field>
+    </div>
+    <div>
+        <button mat-raised-button color="primary" (click)="updatePhone()">Update</button>
+    </div>
+    <div *ngIf="data" class="text-primary">
+        Phone is updated
+    </div>
+</div>

@@ -1,0 +1,29 @@
+<div class="row justify-content-center">
+    
+    <div class="col-5" >
+        <div>
+            <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>Name</mat-label>
+                <input matInput [formControl]="name" (keyup)="getContactByName()" placeholder="Search by Entering Name" value="Jay">
+            </mat-form-field>
+        </div>
+        <br>
+        <table class="table table-bordered" *ngIf="contacts">
+            <thead class="table-dark">
+                <tr>
+                    <th>Contact Id</th>
+                    <th>Name</th>
+                    <th>Phone Number</th>
+                </tr>
+            </thead>
+            <tbody class="table-light" >
+                <tr *ngFor="let c of contacts">
+                    <td>{{c._id}}</td>
+                    <td>{{c.name}}</td>
+                    <td>{{c.phone}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+</div>

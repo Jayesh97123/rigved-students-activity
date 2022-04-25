@@ -1,0 +1,23 @@
+<div class="row justify-content-center">
+    <div class="col-5" >        
+        <table class="table table-bordered">
+            <thead class="table-dark">
+                <tr>
+                    <th >Contact Id</th>
+                    <th>Name</th>
+                    <th>Phone Number</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody class="table-light" *ngIf="contacts">
+                <tr *ngFor="let c of contacts">
+                    <td>{{c._id}}</td>
+                    <td>{{c.name}}</td>
+                    <td>{{c.phone}}</td>
+                    <td><button (click)="handleDelete(c._id)" (click)="handleUpdate()" mat-fab color="primary" aria-label="Example icon button with a delete icon"> <mat-icon>delete</mat-icon></button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+</div>

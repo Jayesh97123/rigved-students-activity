@@ -1,0 +1,43 @@
+<div class = "container-fluid">
+    <h3>Login Form</h3>
+    <div *ngIf = "errorMessage" class = "row">
+        <div class = "col-3">
+            <div class = "alert alert-danger">{{errorMessage}}</div>
+        </div>
+    </div>
+    <form [formGroup] = "loginForm" (ngSubmit) = "handleSubmit()">
+       <div class = "form-group">
+        <div class = "row">
+            <div class = "col-3">
+                <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>Profile Id</mat-label>
+                    <input matInput formControlName = "_id" placeholder="Enter Profile Id" value="1">
+                </mat-form-field>
+            </div>
+        </div>
+        <div class = "row">
+            <div class = "col-3">
+                <mat-form-field appearance="fill" class="example-full-width">
+                    <mat-label>Password</mat-label>
+                    <input matInput formControlName = "password" [type]="showPassword ? 'text' : 'password'" name="password">
+                    <mat-icon matSuffix (click)="togglePasswordVisibility()">
+                        {{showPassword?'visibility_off':'visibility'}}
+                    </mat-icon>
+                </mat-form-field>
+            </div>
+        </div>
+        <br />
+        <div class = "row">
+            <div class = "col-1">
+                <input type = "submit" value = "Login" class = "btn btn-primary">
+            </div>
+            <div class = "col-1">
+                <input type = "reset" value = "Reset" class = "btn btn-primary">
+            </div>
+            <div class="col-1">
+                <button mat-raised-button color="primary"><a routerLink="/register">Register</a></button>
+            </div>
+        </div>
+       </div>
+    </form>
+</div>

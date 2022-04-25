@@ -1,0 +1,70 @@
+<div class = "container-fluid">
+    <h3>Profile Registration</h3>
+    <div *ngIf = "errorMessage" class = "row">
+        <div class = "col-3">
+            <div class = "alert alert-danger">{{errorMessage}}</div>
+        </div>
+    </div>
+    <form [formGroup] = "profileForm" (ngSubmit) = "handleSubmit()">
+       <div class = "form-group">
+        <div class = "row">
+            <div class = "col-3">
+                <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>Profile Id</mat-label>
+                    <input matInput formControlName = "_id" placeholder="Enter Profile Id" value="1">
+                </mat-form-field>
+            </div>
+        </div>
+        <div class = "row">
+            <div class = "col-3">
+                <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>Name</mat-label>
+                    <input matInput formControlName = "name" placeholder="Enter Name" value="Jay">
+                </mat-form-field>
+            </div>
+        </div>
+        <div class = "row">
+            <div class = "col-3">
+                <mat-form-field appearance="fill" class="example-full-width">
+                    <mat-label>Password</mat-label>
+                    <input matInput formControlName = "password" [type]="showPassword ? 'text' : 'password'" name="password">
+                    <mat-icon matSuffix (click)="togglePasswordVisibility()">
+                        {{showPassword?'visibility_off':'visibility'}}
+                    </mat-icon>
+                </mat-form-field>
+            </div>
+        </div>
+        <div class = "row">
+            <div class = "col-3">
+                <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>Phone</mat-label>
+                    <input matInput formControlName = "phone" placeholder="Enter phone number" value="22558822">
+                </mat-form-field>
+            </div>
+        </div>
+        <div class = "row">
+            <div class = "col-3">
+                <mat-form-field appearance="fill">
+                    <mat-label>Choose a date</mat-label>
+                    <input matInput formControlName = "dob" [matDatepicker]="picker">
+                    <mat-hint>MM/DD/YYYY</mat-hint>
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>                 
+            </div>
+        </div>
+        <br />
+        <div class = "row">
+            <div class = "col-1">
+                <input type = "submit" value = "Submit" class = "btn btn-primary">
+            </div>
+            <div class = "col-1">
+                <input type = "reset" value = "Reset" class = "btn btn-primary">
+            </div>
+            <div class="col-1">
+                <button mat-raised-button color="primary"><a routerLink="/login">Login</a></button>
+            </div>
+        </div>
+       </div>
+    </form>
+</div>

@@ -1,0 +1,45 @@
+<div class = "container-fluid ">
+    <h3>Add Contact</h3>
+    <div *ngIf = "dt?.modifiedCount" class = "row ">
+        <div class = "col-3">
+            <div class = "text-primary">Contact is added with id {{ContactForm.controls['_id'].value}}</div>
+        </div>
+    </div>
+    <form [formGroup] = "ContactForm" (ngSubmit) = "handleSubmit()">
+       <div class = "form-group">
+        <div class = "row">
+            <div class = "col-3">
+                <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>Contact Id</mat-label>
+                    <input matInput formControlName = "_id" placeholder="Enter Contact Id" value="1">
+                </mat-form-field>
+            </div>
+        </div>
+        <div class = "row">
+            <div class = "col-3">
+                <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>Name</mat-label>
+                    <input matInput formControlName = "name" placeholder="Enter Name" value="Jay">
+                </mat-form-field>
+            </div>
+        </div>
+        <div class = "row">
+            <div class = "col-3">
+                <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>Phone Number</mat-label>
+                    <input matInput formControlName = "phone" placeholder="Enter Phone Number" value="1">
+                </mat-form-field>
+            </div>
+        </div>
+        <br />
+        <div class = "row">
+            <div class = "col-2">
+                <input type = "submit" value = "Add" class = "btn btn-primary">
+            </div>
+            <div class = "col-2">
+                <input type = "reset" value = "Reset" class = "btn btn-primary">
+            </div>
+        </div>
+       </div>
+    </form>
+</div>
